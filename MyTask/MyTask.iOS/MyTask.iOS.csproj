@@ -31,6 +31,7 @@
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <CodesignKey>Apple Development: keevbush@gmail.com (KF67GF3XDQ)</CodesignKey>
     <CodesignProvision>iOS Team Provisioning Profile: com.bush.MyTask</CodesignProvision>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
