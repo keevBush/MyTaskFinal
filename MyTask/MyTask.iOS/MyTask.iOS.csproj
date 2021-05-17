@@ -29,7 +29,8 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: keevbush@gmail.com (KF67GF3XDQ)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.bush.MyTask</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
