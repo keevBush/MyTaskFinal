@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:customControl="clr-namespace:MyTask.CustomControls"
+    RowDefinitions="auto,auto,auto"  
+    RowSpacing="0"
+    x:Class="MyTask.CustomControls.MyTaskEntry">
+    <Label
+        x:Name="label"
+        FontSize="Body"
+        Grid.Row="0"
+        TextColor="#CDD5E0"
+        Margin="10,0,0,0"
+        FontAttributes="Bold"
+        />
+    <Frame
+        HasShadow="False"
+        x:Name="border"
+        Grid.Row="1"
+        BorderColor="#CDD5E0"
+        BackgroundColor="Transparent"
+        Padding="5"
+        CornerRadius="10"
+        >
+        <customControl:InvisibleEntry
+            Focused="Entry_Focused"
+            x:Name="textbox"
+            Margin="{OnPlatform iOS=5,Android=0 }"
+            TextColor="#1E2736"
+            PlaceholderColor="#CDD5E0"
+            TextChanged="textbox_TextChanged"
+            Unfocused="Entry_Unfocused"
+            />
+    </Frame>
+    <Grid
+        Grid.Row="2"
+        Margin="0,5,0,0"
+        RowSpacing="0"
+        RowDefinitions="auto,auto"
+        >
+        <Label
+            BackgroundColor="red"
+            Text="Error"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="End"
+            TextColor="White"
+            Padding="10,3,10,3"
+            />
+        <BoxView
+            HeightRequest="2"
+            Grid.Row="1"
+            BackgroundColor="Black"
+            />
+    </Grid>
+</Grid>

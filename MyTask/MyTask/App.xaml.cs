@@ -1,3 +1,5 @@
+using MyTask.Repositories;
+using MyTask.Services;
 using MyTask.ViewModels;
 using MyTask.Views;
 using Prism;
@@ -19,11 +21,18 @@ namespace MyTask
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("splashscreen-view");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<SchedulerPage, SchedulerViewModel>("scheduler-view");
+            containerRegistry.RegisterForNavigation<SplashscreenPage, SplashscreenViewModel>("splashscreen-view");
+            containerRegistry.RegisterForNavigation<RegisterPage, RegisterViewModel>("register-view");
+
+            containerRegistry.RegisterInstance(new DatabaseService());
+            containerRegistry.RegisterInstance(new UserRepository());
+
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();

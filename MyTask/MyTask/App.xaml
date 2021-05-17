@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              x:Class="MyTask.App">
-  <Application.Resources>
-
-    <!-- Application resource dictionary -->
-
-  </Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary Source="Themes/AppTheme.xaml"/>
+    </Application.Resources>
 </prism:PrismApplication>

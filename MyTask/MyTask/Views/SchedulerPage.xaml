@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="MyTask.Views.SchedulerPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:resources="clr-namespace:MyTask.Localizations"
+    xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:customControl="clr-namespace:MyTask.CustomControls"
+    ios:Page.UseSafeArea="True">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame CornerRadius="20" Margin="0,-15,0,0">
+                    <Grid
+                        RowDefinitions="auto,auto,auto,auto"
+                        >
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            >
+                            <ImageButton
+                                HorizontalOptions="Start"
+                                Padding="5"
+                                WidthRequest="40"
+                                CornerRadius="40"
+                                BackgroundColor="White"
+                                VerticalOptions="Center"
+                                Source="ic_menu.xml"
+                                />
+                            <tk:AvatarView
+                                HorizontalOptions="End"
+                                Grid.Column="1"
+                                Color="{Binding Color}"
+                                tk:TouchEffect.PressedScale="1.2"
+                                FontSize="20"
+                                Text="{Binding FirstLetter}"
+                                TextColor="White"
+                                tk:TouchEffect.PressedAnimationDuration="200"
+                                tk:TouchEffect.NormalAnimationDuration="200"
+                                FontFamily="ProductSans-Medium"
+                                VerticalOptions="Center"
+                                />
+                        </Grid>
+                        <Label
+                            Grid.Row="1"
+                            Style="{StaticResource LabelSubTitle}"
+                            FontSize="Body"
+                            >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span 
+                                        FontSize="Body"
+                                        Text="Welcome "/>
+                                    <Span Text=" "/>
+                                    <Span
+                                        FontSize="Body"
+                                        Text="{Binding Username}" FontFamily="ProductSans-Medium"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <customControl:MyTaskCalendar
+                            Grid.Row="2"
+                            />
+                    </Grid>
+                </Frame>
+                <!--<Label Text="{x:Static resources:AppResources.DailyTasks}" />-->
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

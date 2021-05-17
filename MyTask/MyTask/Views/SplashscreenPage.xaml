@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="MyTask.Views.SplashscreenPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:themes="clr-namespace:MyTask.Themes"
+    ios:Page.UseSafeArea="True"
+    xmlns:prism="http://prismlibrary.com"
+    BackgroundColor="{StaticResource PageColorLight}">
+    <ContentPage.Content>
+        <Grid>
+            <Ellipse
+                Margin="-50,-30,0,0"
+                Fill="{StaticResource BaseColorLightBrush}"
+                HeightRequest="150"
+                HorizontalOptions="Start"
+                Opacity="0.5"
+                Stroke="{StaticResource BaseColorLightBrush}"
+                StrokeThickness="1"
+                VerticalOptions="Start"
+                WidthRequest="150" />
+            <Ellipse
+                Margin="0,0,-50,-30"
+                Fill="{StaticResource BaseColorLightBrush}"
+                HeightRequest="190"
+                HorizontalOptions="End"
+                Opacity="0.5"
+                Stroke="{StaticResource BaseColorLightBrush}"
+                StrokeThickness="1"
+                VerticalOptions="End"
+                WidthRequest="190" />
+            <Grid>
+                <Frame
+                    Padding="15"
+                    BackgroundColor="{StaticResource BaseColorLight}"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="40" >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <ActivityIndicator
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    Color="{StaticResource BaseColorLight}"
+                    IsRunning="True"
+                    Margin="0,0,0,40"
+                />
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

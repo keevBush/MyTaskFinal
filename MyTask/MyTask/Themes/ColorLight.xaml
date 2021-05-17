@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="MyTask.Themes.ColorLight"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="BaseColorLight">#5C72EF</Color>
+    <Color x:Key="BlackColorLight">#1E2736</Color>
+    <Color x:Key="PageColorLight">#F0F2F7</Color>
+    <SolidColorBrush x:Key="BaseColorLightBrush">
+        <SolidColorBrush.Color>#5C72EF</SolidColorBrush.Color>
+    </SolidColorBrush>
+</ResourceDictionary>

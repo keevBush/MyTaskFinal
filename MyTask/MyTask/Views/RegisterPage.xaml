@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="clr-namespace:MyTask.Themes"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="True"
+    xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:customControls="clr-namespace:MyTask.CustomControls"
+    BackgroundColor="{StaticResource PageColorLight}"
+    x:Class="MyTask.Views.RegisterPage">
+    <ContentPage.Content>
+        <Grid>
+            <Ellipse
+                Margin="-50,-30,0,0"
+                Fill="{StaticResource BaseColorLightBrush}"
+                HeightRequest="150"
+                HorizontalOptions="Start"
+                Opacity="0.5"
+                Stroke="{StaticResource BaseColorLightBrush}"
+                StrokeThickness="1"
+                VerticalOptions="Start"
+                WidthRequest="150" />
+            <Ellipse
+                Margin="0,0,-50,-30"
+                Fill="{StaticResource BaseColorLightBrush}"
+                HeightRequest="190"
+                HorizontalOptions="End"
+                Opacity="0.5"
+                Stroke="{StaticResource BaseColorLightBrush}"
+                StrokeThickness="1"
+                VerticalOptions="End"
+                WidthRequest="190" />
+            <Grid>
+                <Grid
+                    RowDefinitions="auto,auto,auto,auto,auto"
+                    >
+                    <Frame
+                        Padding="15"
+                        BackgroundColor="{Binding CurrentColor}"
+                        CornerRadius="10"
+                        HasShadow="False"
+                        Margin="0,40,0,20"
+                        HeightRequest="30"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="30" >
+                        <Label
+                            Text="{Binding FirstLetter}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            FontAttributes="Bold"
+                            FontSize="Title"
+                            />
+                    </Frame>
+                    <Label
+                        Grid.Row="1"
+                        Text="Setup primary information"
+                        HorizontalOptions="Center"
+                        TextColor="{StaticResource BlackColorLight}"
+                        FontSize="Title"
+                        FontAttributes="Bold"
+                        />
+                    <customControls:MyTaskEntry
+                        Margin="20,15"
+                        TextChanged="MyTaskEntry_TextChanged"
+                        Label="Username"
+                        Text="{Binding Username, Mode=TwoWay}"
+                        Grid.Row="2"
+                        />
+                    <customControls:MyTaskEntry
+                        Margin="20,0"
+                        Label="Fullname"
+                        Text="{Binding Fullname, Mode=TwoWay}"
+                        Grid.Row="3"
+                        />
+                    <Button
+                        HorizontalOptions="End"
+                        Margin="0,0,20,0"
+                        TextTransform="None"
+                        Text="Mcsl"
+                        Style="{StaticResource DefaultBtn}"
+                        Grid.Row="4"
+                        Command="{Binding RegisterCommad}"
+                        />
+                </Grid>
+                <ActivityIndicator
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    Color="{StaticResource BaseColorLight}"
+                    IsRunning="{Binding IsLoading}"
+                    Margin="0,0,0,40"
+                    />
+            </Grid>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
