@@ -50,6 +50,7 @@
                             Text="{Binding FirstLetter}"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
+                            TextColor="White"
                             FontAttributes="Bold"
                             FontSize="Title"
                             />
@@ -77,9 +78,9 @@
                         />
                     <Button
                         HorizontalOptions="End"
-                        Margin="0,0,20,0"
+                        Margin="0,20,20,0"
                         TextTransform="None"
-                        Text="Mcsl"
+                        Text="Next"
                         Style="{StaticResource DefaultBtn}"
                         Grid.Row="4"
                         Command="{Binding RegisterCommad}"

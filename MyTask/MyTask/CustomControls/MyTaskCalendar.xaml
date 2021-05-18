@@ -2,6 +2,7 @@
 <Grid xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       RowDefinitions="auto,*"
+             xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
       xmlns:converters="clr-namespace:MyTask.Converters"
       xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
              x:Class="MyTask.CustomControls.MyTaskCalendar">
@@ -34,6 +35,7 @@
             <Grid ColumnDefinitions="*,auto">
                 <Grid
                     RowSpacing="0"
+                    Margin="5,0,0,0"
                     RowDefinitions="auto,auto"
                     >
                     <Label 
@@ -54,7 +56,8 @@
                 </Grid>
                 <Image
                     Grid.Column="1"
-                    Source="ic_arrow_drop_down.xml"
+                    Margin="5,0"
+                    Source="{local:ImageResource MyTask.Resources.Images.sort_down.png}"
                     WidthRequest="20"
                     />
             </Grid>

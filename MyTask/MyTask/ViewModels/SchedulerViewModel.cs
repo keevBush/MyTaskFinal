@@ -23,9 +23,11 @@ namespace MyTask.ViewModels
             set => SetProperty(ref _username, value, "Username");
         }
 
+        private string _firstLetter = "-";
         public string FirstLetter
         {
-            get => string.IsNullOrWhiteSpace(Username) || string.IsNullOrEmpty(Username) ? "-" : Username[0].ToString().ToUpper();
+            get => _firstLetter;
+            set => SetProperty(ref _firstLetter, value, "FirstLetter");
         }
 
         private readonly UserRepository _userRepository;
@@ -48,6 +50,7 @@ namespace MyTask.ViewModels
             {
                 var currentUser = await _userRepository.GetCurrentUser();
                 Username = currentUser.Username;
+                FirstLetter = Username.ToUpper()[0].ToString();
                 Color = Xamarin.Forms.Color.FromHex(currentUser.Color);
             }
             catch (Exception e)

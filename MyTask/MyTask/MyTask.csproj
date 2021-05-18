@@ -29,6 +29,16 @@
     <EmbeddedResource Update="Views\SplashscreenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <None Remove="Resources\Fonts\ProductSans-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\ProductSans-Medium.ttf" />
+    <None Remove="Resources\Fonts\ProductSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\ProductSans-Regular.ttf" />
+    <None Remove="Resources\Fonts\ProductSans-Regular-Italic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\ProductSans-Regular-Italic.ttf" />
+    <None Remove="Resources\Images\squared_menu_filled.png" />
+    <EmbeddedResource Include="Resources\Images\squared_menu_filled.png" />
+    <None Remove="Resources\Images\sort_down.png" />
+    <EmbeddedResource Include="Resources\Images\sort_down.png" />
   </ItemGroup>
 
   <ItemGroup>

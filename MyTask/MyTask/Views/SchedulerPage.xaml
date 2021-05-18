@@ -6,6 +6,7 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:resources="clr-namespace:MyTask.Localizations"
     xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
     xmlns:customControl="clr-namespace:MyTask.CustomControls"
     ios:Page.UseSafeArea="True">
     <ContentPage.Content>
@@ -15,6 +16,7 @@
                 >
                 <Frame CornerRadius="20"
                        VerticalOptions="Start"
+                       tk:ShadowEffect.Color="{StaticResource ShadowColorLight}"
                        Margin="0,-15,0,0">
                     <Grid
                         RowDefinitions="auto,auto,auto,auto"
@@ -24,12 +26,17 @@
                             >
                             <ImageButton
                                 HorizontalOptions="Start"
-                                Padding="5"
-                                WidthRequest="40"
-                                CornerRadius="40"
+                                Padding="10"
+                                WidthRequest="50"
+                                tk:TouchEffect.NormalBackgroundColor="Transparent"
+                                tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
+                                tk:TouchEffect.PressedScale="0.8"
+                                tk:TouchEffect.PressedAnimationDuration="60"
+                                tk:TouchEffect.NormalAnimationDuration="200"
+                                CornerRadius="20"
                                 BackgroundColor="White"
                                 VerticalOptions="Center"
-                                Source="ic_menu.xml"
+                                Source="{local:ImageResource MyTask.Resources.Images.squared_menu_filled.png}"
                                 />
                             <tk:AvatarView
                                 HorizontalOptions="End"
@@ -47,6 +54,7 @@
                         </Grid>
                         <Label
                             Grid.Row="1"
+                            
                             Style="{StaticResource LabelSubTitle}"
                             FontSize="Body"
                             >
@@ -54,10 +62,12 @@
                                 <FormattedString>
                                     <Span 
                                         FontSize="Body"
+                                        FontFamily="ProductSans-Regular"
                                         Text="Welcome "/>
                                     <Span Text=" "/>
                                     <Span
                                         FontSize="Body"
+                                        FontAttributes="Bold"
                                         Text="{Binding Username}" FontFamily="ProductSans-Medium"/>
                                 </FormattedString>
                             </Label.FormattedText>
