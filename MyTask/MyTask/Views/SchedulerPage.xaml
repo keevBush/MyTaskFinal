@@ -10,8 +10,12 @@
     ios:Page.UseSafeArea="True">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <Frame CornerRadius="20" Margin="0,-15,0,0">
+            <Grid
+                RowDefinitions="auto,auto,auto"
+                >
+                <Frame CornerRadius="20"
+                       VerticalOptions="Start"
+                       Margin="0,-15,0,0">
                     <Grid
                         RowDefinitions="auto,auto,auto,auto"
                         >
@@ -64,7 +68,7 @@
                     </Grid>
                 </Frame>
                 <!--<Label Text="{x:Static resources:AppResources.DailyTasks}" />-->
-            </StackLayout>
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

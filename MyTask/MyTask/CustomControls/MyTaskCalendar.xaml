@@ -23,8 +23,7 @@
             BorderColor="#C1C8D1"
             HasShadow="False"
             CornerRadius="30"
-            WidthRequest="100"
-            Padding="25,5,15,5"
+            Padding="25,10,15,10"
             Grid.Column="1"
             tk:TouchEffect.NormalBackgroundColor="Transparent"
             tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
@@ -62,6 +61,7 @@
         </Frame>
     </Grid>
     <CollectionView
+        
         Grid.Row ="1"
         SelectionMode="None"
         HeightRequest="60"
@@ -87,7 +87,7 @@
                         tk:TouchEffect.PressedScale="0.8"
                         tk:TouchEffect.PressedAnimationDuration="60"
                         tk:TouchEffect.NormalAnimationDuration="200"
-                        tk:ShadowEffect.OffsetY="50"
+                        HasShadow="False"
                         HeightRequest="35"
                         HorizontalOptions="Center"
                         VerticalOptions="End"

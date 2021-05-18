@@ -38,7 +38,7 @@ namespace MyTask.ViewModels
             IsRunning = true;
             try
             {
-                await Task.Delay(3500);
+                await Task.Delay(1000);
                 var currentUser = await _userRepository.GetCurrentUser();
                 IsRunning = false;
                 if (currentUser == null)
