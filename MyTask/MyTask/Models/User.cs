@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyTasks.Models
+namespace MyTask.Models
 {
     public class User
     {

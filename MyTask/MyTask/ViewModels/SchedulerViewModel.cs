@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MyTask.Repositories;
-using MyTasks.Core.Data.Interfaces;
+using MyTask.Core.Data.Interfaces;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Xamarin.Forms;

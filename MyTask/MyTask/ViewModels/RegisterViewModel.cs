@@ -1,12 +1,12 @@
 ﻿using MyTask.Repositories;
 using MyTask.Services;
-using MyTasks.Models;
+using MyTask.Models;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using MyTasks.Core.Data.Interfaces;
+using MyTask.Core.Data.Interfaces;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
@@ -83,7 +83,7 @@ namespace MyTask.ViewModels
             CurrentColor = RandomColor();
         }
 
-        private async Task ExecuteRegisterCommad()
+        private async System.Threading.Tasks.Task ExecuteRegisterCommad()
         {
             try
             {

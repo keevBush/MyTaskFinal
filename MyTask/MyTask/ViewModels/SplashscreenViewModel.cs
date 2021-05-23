@@ -1,6 +1,6 @@
 ﻿using MyTask.Repositories;
 using MyTask.Services;
-using MyTasks.Core.Data.Interfaces;
+using MyTask.Core.Data.Interfaces;
 using Prism.AppModel;
 using Prism.Navigation;
 using System;

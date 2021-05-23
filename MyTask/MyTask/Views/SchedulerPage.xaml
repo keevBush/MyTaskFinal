@@ -91,7 +91,33 @@
                     </Grid>
                     
                 </Frame>
-                <!--<Label Text="{x:Static resources:AppResources.DailyTasks}" />-->
+                <Grid
+                    Grid.Row="1"
+                    >
+                    <CollectionView>
+                        <CollectionView.Header>
+                            <Grid
+                                Padding="10,0,0,0"
+                                >
+                                <Label 
+                                    Style="{StaticResource LabelSubTitle}"
+                                    Text="Daily's tasks"
+                                />
+                            </Grid>
+                        </CollectionView.Header>
+                        <CollectionView.EmptyView>
+                            <Grid
+                                RowDefinitions="auto,auto"
+                                >
+                                <Label
+                                    Style="{StaticResource SubtitleStyle}"
+                                    Opacity="0.7"
+                                    Text="No task created for this day"
+                                    />
+                            </Grid>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </Grid>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

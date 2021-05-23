@@ -5,6 +5,7 @@ using MyTask.Repositories;
 using MyTask.Services;
 using MyTask.ViewModels;
 using MyTask.Views;
+using MyTask.Core.Data.Interfaces;
 using MyTasks.Core.Data.Interfaces;
 using Prism;
 using Prism.Ioc;
@@ -19,7 +20,8 @@ namespace MyTask
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
-            AppCenter.Start("75e0577e-b876-444c-92cf-8f7b6a618a5c",
+            AppCenter.Start("android=75e0577e-b876-444c-92cf-8f7b6a618a5c;" +
+                            "ios=5c07eac0-82eb-42dc-8893-4367a6d342d2;",
                 typeof(Analytics), typeof(Crashes));
         }
 
@@ -38,6 +40,7 @@ namespace MyTask
             containerRegistry.RegisterInstance(new DatabaseService());
             containerRegistry.RegisterSingleton<IDatabaseService,DatabaseService>();
             containerRegistry.RegisterSingleton<IUserRepository,UserRepository>();
+            containerRegistry.RegisterSingleton<TaskRepository>();
 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
