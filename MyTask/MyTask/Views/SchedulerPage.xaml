@@ -16,18 +16,25 @@
                 >
                 <Frame CornerRadius="20"
                        VerticalOptions="Start"
-                       tk:ShadowEffect.Color="{StaticResource ShadowColorLight}"
-                       Margin="0,-15,0,0">
+                       tk:ShadowEffect.Color="#C1C8D1"
+                       tk:ShadowEffect.Radius="5"
+                       tk:ShadowEffect.OffsetY="5"
+                       tk:ShadowEffect.Opacity="0.3"
+                       Margin="0,-15,0,0"
+                       Padding="0,20,0,5"
+                       >
                     <Grid
                         RowDefinitions="auto,auto,auto,auto"
                         >
                         <Grid
-                            ColumnDefinitions="*,*"
+                            Margin="20,0"
+                            ColumnDefinitions="*,*,*"
                             >
                             <ImageButton
                                 HorizontalOptions="Start"
-                                Padding="10"
-                                WidthRequest="50"
+                                Padding="15"
+                                Margin="-8,0,0,0"
+                                WidthRequest="60"
                                 tk:TouchEffect.NormalBackgroundColor="Transparent"
                                 tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
                                 tk:TouchEffect.PressedScale="0.8"
@@ -38,9 +45,15 @@
                                 VerticalOptions="Center"
                                 Source="{local:ImageResource MyTask.Resources.Images.squared_menu_filled.png}"
                                 />
+                            <Label
+                                Grid.Column="1"
+                                Text="My task"
+                                Style="{StaticResource LabelTitle}"
+                                VerticalOptions="Center"
+                                />
                             <tk:AvatarView
                                 HorizontalOptions="End"
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Color="{Binding Color}"
                                 tk:TouchEffect.PressedScale="1.2"
                                 FontSize="20"
@@ -54,7 +67,7 @@
                         </Grid>
                         <Label
                             Grid.Row="1"
-                            
+                            Margin="20,0,0,0"
                             Style="{StaticResource LabelSubTitle}"
                             FontSize="Body"
                             >
@@ -76,6 +89,7 @@
                             Grid.Row="2"
                             />
                     </Grid>
+                    
                 </Frame>
                 <!--<Label Text="{x:Static resources:AppResources.DailyTasks}" />-->
             </Grid>

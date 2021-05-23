@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             IsAnimationEnabled="True"
+             SystemPadding="10"
+             xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+             CloseWhenBackgroundIsClicked="True"
+             xmlns:customControl="clr-namespace:MyTask.CustomControls;assembly=MyTask"
+             xmlns:converters="clr-namespace:MyTask.Converters;assembly=MyTask"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="MyTask.CustomControls.CalendarPopup"
+             x:Name="page"
+             >
+    <popup:PopupPage.Resources>
+        <converters:CalendarPopupCheckSameOpacityConverter x:Key="CalendarPopupCheckSameOpacity" />
+        <converters:CalendarPopupCheckSizeConverter x:Key="CalendarPopupCheckSize" />
+    </popup:PopupPage.Resources>
+    <Frame 
+        VerticalOptions="End"
+        HeightRequest="400"
+        Margin="20,20,20,20"
+        HasShadow="False"
+        tk:ShadowEffect.Color="#555"
+        tk:ShadowEffect.Radius="5"
+        tk:ShadowEffect.OffsetY="5"
+        tk:ShadowEffect.Opacity="0.6"
+        CornerRadius="20"
+        >
+        <Grid
+            RowDefinitions="auto,*"
+            Margin="0,0,0,20"
+            >
+            <Frame
+                HasShadow="False"
+                Margin="40,0"
+                CornerRadius="30"
+                Padding="20"
+                BorderColor="#E5E9FA"
+                >
+                <Grid
+                    ColumnDefinitions="*,auto"
+                    >
+                    <Label
+                        Text="{Binding Source={x:Reference monthView}, Path=CurrentItem}"
+                        FontFamily="ProductSans-Medium"
+                        FontSize="Body"
+                        TextColor="Black"
+                        />
+                   <customControl:InvisibleEntry
+                       Grid.Column="1"
+                       Text="2000"
+                       x:Name="txtbxYear"
+                       WidthRequest="50"
+                       Keyboard="Numeric"
+                       />
+                   
+                </Grid>
+            </Frame>
+            <CarouselView
+                Grid.Row="1"
+                VerticalScrollBarVisibility="Never"
+                PeekAreaInsets = "0,130"
+                x:Name="monthView"
+                Loop="False"
+                IsScrollAnimated="True"
+                CurrentItemChanged="MonthView_OnCurrentItemChanged"
+                >
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout 
+                        ItemSpacing="10"
+                        SnapPointsType="Mandatory"
+                        SnapPointsAlignment="Center"
+                        Orientation="Vertical"
+                    />
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Label 
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            tk:TouchEffect.PressedScale="0.8"
+                            tk:TouchEffect.PressedAnimationDuration="60"
+                            tk:TouchEffect.NormalAnimationDuration="200"
+                            BindingContext="{Binding .}"
+                            
+                            Style="{StaticResource LabelTitle}"
+                            Text="{Binding .}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                            </Label.GestureRecognizers>
+                            <Label.Opacity>
+                                <MultiBinding Converter="{StaticResource CalendarPopupCheckSameOpacity}">
+                                    <Binding Path="." />
+                                    <Binding Source="{x:Reference monthView}" Path="CurrentItem"/>
+                                </MultiBinding>
+                            </Label.Opacity>
+                            <Label.FontSize>
+                                <MultiBinding Converter="{StaticResource CalendarPopupCheckSize}">
+                                    <Binding Path="." />
+                                    <Binding Source="{x:Reference monthView}" Path="CurrentItem"/>
+                                </MultiBinding>
+                            </Label.FontSize>
+                        </Label>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </Grid>
+    </Frame>    
+</popup:PopupPage>

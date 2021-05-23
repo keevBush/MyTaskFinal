@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MyTasks.Core.Data.Interfaces;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
@@ -64,11 +65,11 @@ namespace MyTask.ViewModels
         #endregion
 
         #region Injection
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly INavigationService _navigationService;
         #endregion
 
-        public RegisterViewModel(UserRepository userRepository, INavigationService navigationService) : base(navigationService)
+        public RegisterViewModel(IUserRepository userRepository, INavigationService navigationService) : base(navigationService)
         {
             _userRepository = userRepository;
             _navigationService = navigationService;

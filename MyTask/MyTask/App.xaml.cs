@@ -2,6 +2,7 @@ using MyTask.Repositories;
 using MyTask.Services;
 using MyTask.ViewModels;
 using MyTask.Views;
+using MyTasks.Core.Data.Interfaces;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Essentials.Implementation;
@@ -33,7 +34,8 @@ namespace MyTask
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterViewModel>("register-view");
 
             containerRegistry.RegisterInstance(new DatabaseService());
-            containerRegistry.RegisterInstance(new UserRepository());
+            containerRegistry.RegisterSingleton<IDatabaseService,DatabaseService>();
+            containerRegistry.RegisterSingleton<IUserRepository,UserRepository>();
 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 

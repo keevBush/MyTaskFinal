@@ -19,6 +19,7 @@ namespace MyTask.CustomControls
     public partial class MyTaskEntry : Grid
     {
         public event EventHandler<MyTaskEntryEventArgs> TextChanged;   
+        
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(
                                     nameof(Label),
                                     typeof(string),

@@ -40,9 +40,7 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     WidthRequest="40" >
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                    </Frame.GestureRecognizers>
+                   
                 </Frame>
                 <ActivityIndicator
                     VerticalOptions="End"
