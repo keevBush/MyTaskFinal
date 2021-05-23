@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MyTask.Repositories;
+using MyTasks.Core.Data.Interfaces;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -30,9 +31,9 @@ namespace MyTask.ViewModels
             set => SetProperty(ref _firstLetter, value, "FirstLetter");
         }
 
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public SchedulerViewModel(UserRepository userRepository,INavigationService navigationService):base(navigationService)
+        public SchedulerViewModel(IUserRepository userRepository,INavigationService navigationService):base(navigationService)
         {
             _userRepository = userRepository;
         }

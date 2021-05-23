@@ -11,7 +11,7 @@ namespace MyTask.ViewModels
 {
     public class SplashscreenViewModel:ViewModelBase
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly INavigationService _navigationService;
 
         private bool _isRuning;
@@ -20,7 +20,7 @@ namespace MyTask.ViewModels
             get => _isRuning;
             set => SetProperty(ref _isRuning, value, "IsRunning");
         }
-        public SplashscreenViewModel(UserRepository userRepository, INavigationService navigationService):base(navigationService)
+        public SplashscreenViewModel(IUserRepository userRepository, INavigationService navigationService):base(navigationService)
         {
             _userRepository = userRepository;
             _navigationService = navigationService;
@@ -38,13 +38,13 @@ namespace MyTask.ViewModels
             IsRunning = true;
             try
             {
-                await Task.Delay(1000);
+                await Task.Delay(2000);
                 var currentUser = await _userRepository.GetCurrentUser();
                 IsRunning = false;
                 if (currentUser == null)
                 {
                     
-                    var result  =await _navigationService.NavigateAsync("/register-view");
+                    await _navigationService.NavigateAsync("/register-view");
                     return;
                 }
 

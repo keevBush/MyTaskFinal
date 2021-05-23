@@ -25,4 +25,14 @@
         <Setter Property="FontSize" Value="Subtitle" />
         <Setter Property="TextColor" Value="{StaticResource BlackColorLight}" />
     </Style>
+    <Style x:Key="LabelTitle" TargetType="Label">
+        <Setter Property="FontFamily" Value="ProductSans-Medium"/>
+        <Setter Property="FontSize" Value="Title" />
+        <Setter Property="TextColor" Value="{StaticResource BlackColorLight}" />
+    </Style>
+    
+    <Style x:Key="LabelBold" TargetType="Label">
+        <Setter Property="FontFamily" Value="ProductSans-Medium"/>
+        <Setter Property="TextColor" Value="{StaticResource BlackColorLight}" />
+    </Style>
 </ResourceDictionary>
