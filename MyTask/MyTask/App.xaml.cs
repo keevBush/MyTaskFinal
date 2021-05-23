@@ -1,3 +1,6 @@
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using MyTask.Repositories;
 using MyTask.Services;
 using MyTask.ViewModels;
@@ -16,14 +19,13 @@ namespace MyTask
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
+            AppCenter.Start("75e0577e-b876-444c-92cf-8f7b6a618a5c",
+                typeof(Analytics), typeof(Crashes));
         }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
-#if DEBUG
-            HotReloader.Current.Run(this); 
-#endif
             await NavigationService.NavigateAsync("splashscreen-view");
         }
 
