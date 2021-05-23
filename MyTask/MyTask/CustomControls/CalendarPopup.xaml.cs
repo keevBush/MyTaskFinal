@@ -37,7 +37,7 @@ namespace MyTask.CustomControls
 
         private void MonthView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
-            
+            Xamarin.Essentials.Vibration.Vibrate(250);
         }
 
         private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
