@@ -60,7 +60,7 @@
             <CarouselView
                 Grid.Row="1"
                 VerticalScrollBarVisibility="Never"
-                PeekAreaInsets = "0,130"
+                PeekAreaInsets = "0,100"
                 x:Name="monthView"
                 Loop="False"
                 IsScrollAnimated="True"

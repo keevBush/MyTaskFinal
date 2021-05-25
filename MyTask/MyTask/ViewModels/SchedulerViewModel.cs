@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using MyTask.Repositories;
 using MyTask.Core.Data.Interfaces;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace MyTask.ViewModels
@@ -30,12 +32,21 @@ namespace MyTask.ViewModels
             get => _firstLetter;
             set => SetProperty(ref _firstLetter, value, "FirstLetter");
         }
+        public AsyncCommand NewTaskPopupCommand { get; set; }
 
+        public ObservableCollection<Models.Task> Tasks { get; set; }
         private readonly IUserRepository _userRepository;
-
-        public SchedulerViewModel(IUserRepository userRepository,INavigationService navigationService):base(navigationService)
+        private readonly TaskRepository _taskRepository;
+        private readonly INavigationService _navigationService;
+        
+        public SchedulerViewModel(IUserRepository userRepository,INavigationService navigationService, TaskRepository taskRepository):base(navigationService)
         {
             _userRepository = userRepository;
+            _taskRepository = taskRepository;
+            _navigationService = navigationService;
+
+            Tasks = new ObservableCollection<Models.Task>();
+            NewTaskPopupCommand = new AsyncCommand(ExecuteNewTaskPopupCommand);
         }
 
         public async override void Initialize(INavigationParameters parameters)
@@ -47,18 +58,23 @@ namespace MyTask.ViewModels
 
         private async Task LoadData()
         {
-            try
-            {
-                var currentUser = await _userRepository.GetCurrentUser();
-                Username = currentUser.Username;
-                FirstLetter = Username.ToUpper()[0].ToString();
-                Color = Xamarin.Forms.Color.FromHex(currentUser.Color);
-            }
-            catch (Exception e)
-            {
+            var currentUser = await _userRepository.GetCurrentUser();
+            Username = currentUser.Username;
+            FirstLetter = Username.ToUpper()[0].ToString();
+            Color = Xamarin.Forms.Color.FromHex(currentUser.Color);
+                
+            Tasks.Clear();
 
-                throw;
+            var tasks = await _taskRepository.GetAsync(t => t.CreatedAt == DateTime.Now);
+            foreach (var task in tasks)
+            {
+                Tasks.Add(task);
             }
+        }
+        
+        private async Task ExecuteNewTaskPopupCommand()
+        {
+            await _navigationService.NavigateAsync("new-task-popup");
         }
     }
 }

@@ -10,7 +10,7 @@
     xmlns:customControl="clr-namespace:MyTask.CustomControls"
     ios:Page.UseSafeArea="True">
     <ContentPage.Content>
-        <ScrollView>
+        <Grid>
             <Grid
                 RowDefinitions="auto,auto,auto"
                 >
@@ -76,7 +76,7 @@
                                     <Span 
                                         FontSize="Body"
                                         FontFamily="ProductSans-Regular"
-                                        Text="Welcome "/>
+                                        Text="{x:Static resources:AppResources.WelcomeBack} "/>
                                     <Span Text=" "/>
                                     <Span
                                         FontSize="Body"
@@ -93,15 +93,24 @@
                 </Frame>
                 <Grid
                     Grid.Row="1"
+                    RowSpacing="0" 
+                    Padding="0" 
+                    ColumnSpacing="0" 
+                    Margin="0"
                     >
-                    <CollectionView>
+                    <CollectionView
+                        Margin = "0"
+                        VerticalOptions="Start"
+                        ItemsSource="{Binding Tasks}"
+                        >
                         <CollectionView.Header>
                             <Grid
                                 Padding="10,0,0,0"
                                 >
                                 <Label 
                                     Style="{StaticResource LabelSubTitle}"
-                                    Text="Daily's tasks"
+                                    FontFamily="ProductSans-Medium"
+                                    Text="{x:Static resources:AppResources.DailyTask}"
                                 />
                             </Grid>
                         </CollectionView.Header>
@@ -109,16 +118,51 @@
                             <Grid
                                 RowDefinitions="auto,auto"
                                 >
+                                <Image
+                                    Margin="0,30,0,0"
+                                    WidthRequest="80"
+                                    HeightRequest="80"
+                                    HorizontalOptions="Center"
+                                    Source="{local:ImageResource MyTask.Resources.Images.no_tasks.png}"
+                                    />
                                 <Label
-                                    Style="{StaticResource SubtitleStyle}"
+                                    Grid.Row="1"
+                                    TextColor="#66768E"
+                                    HorizontalOptions="Center"
+                                    Margin="0,10,0,0"
+                                    FontSize="Subtitle"
                                     Opacity="0.7"
+                                    FontFamily="ProductSans-Medium"
                                     Text="No task created for this day"
                                     />
                             </Grid>
                         </CollectionView.EmptyView>
                     </CollectionView>
+                    
                 </Grid>
             </Grid>
-        </ScrollView>
+            <ImageButton
+                HorizontalOptions="End"
+                        
+                Padding="10"
+                Margin="0,0,10,10"
+                WidthRequest="55"
+                tk:TouchEffect.NormalBackgroundColor="{StaticResource BaseColorLight}"
+                tk:TouchEffect.PressedBackgroundColor="#AFB8EA"
+                tk:TouchEffect.PressedScale="0.8"
+                tk:TouchEffect.PressedAnimationDuration="60"
+                tk:TouchEffect.NormalAnimationDuration="200"
+                
+                tk:ShadowEffect.Color="#AFB8EA"
+                tk:ShadowEffect.Radius="5"
+                tk:ShadowEffect.OffsetY="5"
+                tk:ShadowEffect.Opacity="0.6"
+
+                CornerRadius="20"
+                Command="{Binding NewTaskPopupCommand}"
+                VerticalOptions="End"
+                Source="{local:ImageResource MyTask.Resources.Images.white_plus.png}"
+            />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

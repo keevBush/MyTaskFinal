@@ -6,9 +6,11 @@ using MyTask.Services;
 using MyTask.ViewModels;
 using MyTask.Views;
 using MyTask.Core.Data.Interfaces;
+using MyTask.Views.Popups;
 using MyTasks.Core.Data.Interfaces;
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -33,9 +35,11 @@ namespace MyTask
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterPopupNavigationService();
             containerRegistry.RegisterForNavigation<SchedulerPage, SchedulerViewModel>("scheduler-view");
             containerRegistry.RegisterForNavigation<SplashscreenPage, SplashscreenViewModel>("splashscreen-view");
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterViewModel>("register-view");
+            containerRegistry.RegisterForNavigation<NewTaskPopupPage>("new-task-popup");
 
             containerRegistry.RegisterInstance(new DatabaseService());
             containerRegistry.RegisterSingleton<IDatabaseService,DatabaseService>();
@@ -46,6 +50,8 @@ namespace MyTask
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            
+            
         }
     }
 }

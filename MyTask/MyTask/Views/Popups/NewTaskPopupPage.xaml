@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+    x:Class="MyTask.Views.Popups.NewTaskPopupPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:customControl="clr-namespace:MyTask.CustomControls;assembly=MyTask"
+    xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    CloseWhenBackgroundIsClicked="True"
+    IsAnimationEnabled="True"
+    SystemPadding="10">
+    <popup:PopupPage.Animation>
+        <animations:MoveAnimation
+            DurationIn="200"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </popup:PopupPage.Animation>
+    <popup:PopupPage.Content>
+        <AbsoluteLayout VerticalOptions="End">
+            <customControl:PanContainer
+                Padding="20,0,20,20"
+                AbsoluteLayout.LayoutBounds="0.5,1,1,1"
+                AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional,HeightProportional">
+                <Frame
+                    Padding="0,5,0,0"
+                    CornerRadius="20"
+                    HasShadow="False"
+                    HeightRequest="500"
+                    HorizontalOptions="Fill">
+                    <Grid RowDefinitions="auto,auto,auto,auto,auto,auto">
+                        <Grid
+                            tk:TouchEffect.NormalAnimationDuration="200"
+                            tk:TouchEffect.PressedAnimationDuration="60"
+                            tk:TouchEffect.PressedScale="0.8">
+                            <BoxView
+                                Margin="0,0,0,10"
+                                CornerRadius="2"
+                                HeightRequest="4"
+                                HorizontalOptions="Center"
+                                WidthRequest="150"
+                                Color="#8C9CB5" />
+
+                        </Grid>
+                        <Frame
+                            Grid.Row="1"
+                            Padding="0"
+                            BackgroundColor="#8C9CB5"
+                            CornerRadius="20"
+                            HasShadow="False"
+                            HeightRequest="60"
+                            HorizontalOptions="Center"
+                            WidthRequest="60">
+                            <Label
+                                Padding="0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource LabelTitle}"
+                                Text="T"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </Frame>
+                        <customControl:MyTaskEntry
+                            Grid.Row="2"
+                            Margin="20,0"
+                            Label="Name"
+                            Text="Task's name" />
+                        <CollectionView Grid.Row="5" />
+                        <Frame
+                            Grid.Row="4"
+                            Margin="20,0"
+                            Padding="5"
+                            tk:TouchEffect.NormalAnimationDuration="200"
+                            tk:TouchEffect.NormalBackgroundColor="Transparent"
+                            tk:TouchEffect.PressedAnimationDuration="60"
+                            tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
+                            tk:TouchEffect.PressedScale="0.8"
+                            BorderColor="Transparent"
+                            CornerRadius="20"
+                            HasShadow="False"
+                            VerticalOptions="End">
+                            <Grid RowDefinitions="auto,auto" RowSpacing="0">
+
+
+                                <Label
+                                    Grid.Row="1"
+                                    HorizontalOptions="Center"
+                                    Style="{StaticResource LabelBold}"
+                                    Text="Add new task"
+                                    TextColor="#C1C8D1" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </Frame>
+            </customControl:PanContainer>
+        </AbsoluteLayout>
+    </popup:PopupPage.Content>
+</popup:PopupPage>

@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 
 namespace MyTask.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
         public RegisterPage()

@@ -17,8 +17,10 @@ namespace MyTask.Models
         public DateTime CreatedAt { get; private set; }
         [BsonField("deadline")]
         public DateTime? Deadline { get; set; } = null;
-
         public List<string> Labels;
+        
+        [BsonRef("Steps")]
+        public List<Step> Steps { get; set; }
 
         public Task()
         {
