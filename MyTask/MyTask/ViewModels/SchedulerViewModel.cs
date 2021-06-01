@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using MyTask.Repositories;
 using MyTask.Core.Data.Interfaces;
+using MyTask.Models;
+using MyTask.Services;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
+using Task = System.Threading.Tasks.Task;
 
 namespace MyTask.ViewModels
 {
-    public class SchedulerViewModel:ViewModelBase
+    public class SchedulerViewModel:ViewModelBase,Prism.AppModel.IPageLifecycleAware
     {
         private Color _color;
         public Color Color
@@ -47,6 +49,12 @@ namespace MyTask.ViewModels
 
             Tasks = new ObservableCollection<Models.Task>();
             NewTaskPopupCommand = new AsyncCommand(ExecuteNewTaskPopupCommand);
+            MessagingCenter.Instance.Subscribe<ViewModels.NewTaskViewModel>(this,"update-tasks",ExecuteUpdateTasks);
+        }
+
+        private async void ExecuteUpdateTasks(NewTaskViewModel obj)
+        {
+            await LoadData();
         }
 
         public async override void Initialize(INavigationParameters parameters)
@@ -58,23 +66,51 @@ namespace MyTask.ViewModels
 
         private async Task LoadData()
         {
+            IsRunning = true;
             var currentUser = await _userRepository.GetCurrentUser();
             Username = currentUser.Username;
             FirstLetter = Username.ToUpper()[0].ToString();
             Color = Xamarin.Forms.Color.FromHex(currentUser.Color);
                 
             Tasks.Clear();
-
-            var tasks = await _taskRepository.GetAsync(t => t.CreatedAt == DateTime.Now);
-            foreach (var task in tasks)
+            try
             {
-                Tasks.Add(task);
+                var tasks = await _taskRepository.GetAllAync();
+                    //GetAsync(t => t.CreatedAt >= DateTime.Today && t.CreatedAt < DateTime.Today.AddDays(1));
+                IsRunning = false;
+
+                foreach (var task in tasks)
+                {
+                    Tasks.Add(task);
+                }
+                
             }
+            catch (Exception e)
+            {
+                IsRunning = false;
+                await Application.Current.
+                                MainPage.
+                                ShowErrorSnackBarAsync("One error occured", 
+                                    SnackbarDuration.Long);
+            }
+            
         }
+
+
         
         private async Task ExecuteNewTaskPopupCommand()
         {
             await _navigationService.NavigateAsync("new-task-popup");
+        }
+
+        public void OnAppearing()
+        {
+            
+        }
+
+        public void OnDisappearing()
+        {
+            
         }
     }
 }

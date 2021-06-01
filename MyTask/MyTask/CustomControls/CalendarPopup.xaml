@@ -18,7 +18,7 @@
     </popup:PopupPage.Resources>
     <Frame 
         VerticalOptions="End"
-        HeightRequest="400"
+        HeightRequest="410"
         Margin="20,20,20,20"
         HasShadow="False"
         tk:ShadowEffect.Color="#555"
@@ -60,12 +60,17 @@
             <CarouselView
                 Grid.Row="1"
                 VerticalScrollBarVisibility="Never"
-                PeekAreaInsets = "0,100"
                 x:Name="monthView"
                 Loop="False"
                 IsScrollAnimated="True"
                 CurrentItemChanged="MonthView_OnCurrentItemChanged"
                 >
+                <CarouselView.PeekAreaInsets>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,125" />
+                        <On Platform="Android" Value="0,100" />
+                    </OnPlatform>
+                </CarouselView.PeekAreaInsets>
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout 
                         ItemSpacing="10"

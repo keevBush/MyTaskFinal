@@ -8,9 +8,13 @@
     xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:templates="clr-namespace:MyTask.Views.Templates;assembly=MyTask"
     CloseWhenBackgroundIsClicked="True"
     IsAnimationEnabled="True"
-    SystemPadding="10">
+    SystemPadding="10"
+    x:Name="page">
+    
+        
     <popup:PopupPage.Animation>
         <animations:MoveAnimation
             DurationIn="200"
@@ -34,19 +38,30 @@
                     HeightRequest="500"
                     HorizontalOptions="Fill">
                     <Grid RowDefinitions="auto,auto,auto,auto,auto,auto">
-                        <Grid
-                            tk:TouchEffect.NormalAnimationDuration="200"
-                            tk:TouchEffect.PressedAnimationDuration="60"
-                            tk:TouchEffect.PressedScale="0.8">
-                            <BoxView
-                                Margin="0,0,0,10"
-                                CornerRadius="2"
-                                HeightRequest="4"
-                                HorizontalOptions="Center"
-                                WidthRequest="150"
-                                Color="#8C9CB5" />
+                        
+                        <BoxView
+                            CornerRadius="2"
+                            HeightRequest="4"
+                            HorizontalOptions="Center"
+                            WidthRequest="150"
+                            Color="#8C9CB5" />
 
-                        </Grid>
+                        <ImageButton
+                            HorizontalOptions="End"
+                            CornerRadius="20"
+                            Margin="0,0,10,0"
+                            Padding="15"
+                            Grid.Row="1"
+                            tk:TouchEffect.NormalAnimationDuration="200"
+                            tk:TouchEffect.NormalBackgroundColor="Transparent"
+                            tk:TouchEffect.PressedAnimationDuration="60"
+                            tk:TouchEffect.PressedBackgroundColor="#A7FFEC"
+                            tk:TouchEffect.PressedScale="0.8"
+                            BackgroundColor="White"
+                            WidthRequest="60"
+                            Command="{Binding SaveTaskCommand}"
+                            Source="{local:ImageResource MyTask.Resources.Images.checkmark.png}"
+                            />
                         <Frame
                             Grid.Row="1"
                             Padding="0"
@@ -55,6 +70,7 @@
                             HasShadow="False"
                             HeightRequest="60"
                             HorizontalOptions="Center"
+                            VerticalOptions="Start"
                             WidthRequest="60">
                             <Label
                                 Padding="0"
@@ -68,24 +84,25 @@
                             Grid.Row="2"
                             Margin="20,0"
                             Label="Name"
-                            Text="Task's name" />
+                            Text="{Binding Name, Mode=TwoWay}" />
                         <CollectionView Grid.Row="5" />
                         <Frame
                             Grid.Row="4"
                             Margin="20,0"
-                            Padding="5"
+                            Padding="5,10"
                             tk:TouchEffect.NormalAnimationDuration="200"
                             tk:TouchEffect.NormalBackgroundColor="Transparent"
                             tk:TouchEffect.PressedAnimationDuration="60"
                             tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
                             tk:TouchEffect.PressedScale="0.8"
-                            BorderColor="Transparent"
-                            CornerRadius="20"
+                            BorderColor="#F0F2F7"
+                            CornerRadius="10"
                             HasShadow="False"
                             VerticalOptions="End">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddStepCommand}" />
+                            </Frame.GestureRecognizers>
                             <Grid RowDefinitions="auto,auto" RowSpacing="0">
-
-
                                 <Label
                                     Grid.Row="1"
                                     HorizontalOptions="Center"
@@ -94,6 +111,60 @@
                                     TextColor="#C1C8D1" />
                             </Grid>
                         </Frame>
+                        <ListView
+                            Grid.Row="5"
+                            HasUnevenRows="True"
+                            SeparatorVisibility="None"
+                            CachingStrategy="RecycleElement"
+                            SelectionMode="None"
+                            ItemsSource="{Binding Steps}"
+                            >
+                            <ListView.ItemTemplate>
+                                 <DataTemplate>
+                                    <ViewCell>
+                                        <Grid
+                                        Padding="20,10"
+                                        >
+                                        <Frame
+                                            HasShadow="False"
+                                            Padding="5"
+                                            CornerRadius="10"
+                                            BorderColor="#E5E9FA"
+                                            
+                                            >
+                                            <Grid
+                                                ColumnDefinitions="*,auto"
+                                            >
+                                                <Grid
+                                                    VerticalOptions="Center"
+                                                    Padding="10,10,10,0"
+                                                    RowDefinitions="*,auto,auto"
+                                                >
+                                                    <customControl:InvisibleEntry
+                                                        Text="{Binding Name}"
+                                                        Placeholder="Type step name"
+                                                    />
+                                                </Grid>
+                                                <Button
+                                                    VerticalOptions="Center"
+                                                    Grid.Column="1"
+                                                    TextColor="Red"
+                                                    tk:TouchEffect.NormalAnimationDuration="200"
+                                                    tk:TouchEffect.PressedAnimationDuration="60"
+                                                    tk:TouchEffect.PressedScale="0.8"
+                                                    Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteCurrentStepCommand}"
+                                                    CommandParameter="{Binding Id}"
+                                                    Margin="0,0,10,0"
+                                                    Text="delete"
+                                                />
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            
+                        </ListView>
                     </Grid>
                 </Frame>
             </customControl:PanContainer>

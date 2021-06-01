@@ -5,11 +5,11 @@ namespace MyTask.Repositories
 {
     public class StepRepository:GenericRepository<Models.Step>
     {
-        private readonly DatabaseService _databaseService;
 
-        public StepRepository(DatabaseService databaseService):base(databaseService)
+        
+        public StepRepository():base()
         {
-            _databaseService = databaseService;
+            
         }
     }
 }

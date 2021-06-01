@@ -5,25 +5,20 @@ namespace MyTask.Models
 {
     public class Step
     {
-        [BsonId]
-        [BsonField("id")]
         public string Id { get; set; }
-        [BsonField("name")]
         public string Name { get; set; }
-        [BsonField("deadline")]
-        private DateTime? Deadline { get; set; }
-        [BsonField("remember_date")]
-        private DateTime? RememberDate { get; set; }
-        [BsonField("repeat")]
-        private bool? Repeat { get; set; }
+        public DateTime? Deadline { get; set; }
+        public DateTime? RememberDate { get; set; }
+        public bool Repeat { get; set; }
 
         public Step()
         {
-            Id = Guid.NewGuid().ToString();
-            Name = "New step";
+            Deadline = DateTime.MaxValue;
+            RememberDate = DateTime.MaxValue;
+            Repeat = false;
         }
         
         [BsonRef("Tasks")]
-        public Task Task { get; set; }
+        public virtual Task Task { get; set; }
     }
 }

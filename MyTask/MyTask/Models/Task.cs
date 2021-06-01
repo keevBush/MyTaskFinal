@@ -6,25 +6,20 @@ namespace MyTask.Models
 {
     public class Task
     {
-        [BsonId]
-        [BsonField("id")]
         public string Id { get; set; }
-        [BsonField("name")]
         public string Name { get; set; }
-        [BsonField("description")]
         public string Description { get; set; }
-        [BsonField("created_at")]
         public DateTime CreatedAt { get; private set; }
-        [BsonField("deadline")]
-        public DateTime? Deadline { get; set; } = null;
-        public List<string> Labels;
-        
-        [BsonRef("Steps")]
-        public List<Step> Steps { get; set; }
+        public DateTime Deadline { get; set; }
+        public List<string> Labels { get; set; }
+
+        //[BsonRef("Steps")]
+        public virtual List<Step> Steps { get; set; }
 
         public Task()
         {
             CreatedAt = DateTime.Now;
+            Deadline = DateTime.MaxValue;
             Labels = new List<string>();
         }
     }

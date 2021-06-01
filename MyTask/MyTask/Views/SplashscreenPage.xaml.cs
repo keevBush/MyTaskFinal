@@ -25,5 +25,10 @@ namespace MyTask.Views
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
         }
+
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            await this.ShowSuccessSnackBarAsync("cooool", SnackbarDuration.Long);
+        }
     }
 }

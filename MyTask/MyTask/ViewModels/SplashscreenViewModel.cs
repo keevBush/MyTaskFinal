@@ -48,7 +48,7 @@ namespace MyTask.ViewModels
                     return;
                 }
 
-                await _navigationService.NavigateAsync("/scheduler-view");
+                await _navigationService.NavigateAsync("/scheduler-view",null,false,true);
             }
             catch (Exception e)
             {

@@ -46,6 +46,18 @@
     <EmbeddedResource Include="Resources\Images\no_tasks.png" />
     <None Remove="Resources\Images\icons8-plus_math.png" />
     <EmbeddedResource Include="Resources\Images\white_plus.png" />
+    <None Remove="Resources\Images\gray_plus.png" />
+    <EmbeddedResource Include="Resources\Images\gray_plus.png" />
+    <None Remove="Resources\Images\icons8-checkmark.png" />
+    <EmbeddedResource Include="Resources\Images\checkmark.png" />
+    <None Remove="Resources\Images\icons8-ingredients_list.png" />
+    <EmbeddedResource Include="Resources\Images\tasks_list.png" />
+    <None Remove="Resources\Images\icons8-task_completed.png" />
+    <EmbeddedResource Include="Resources\Images\tasks_completed.png" />
+    <None Remove="Resources\Images\icons8-cancel_subscription.png" />
+    <EmbeddedResource Include="Resources\Images\tasks_not_completed.png" />
+    <None Remove="Resources\Images\icons8-important_month.png" />
+    <EmbeddedResource Include="Resources\Images\remember_date.png" />
   </ItemGroup>
 
   <ItemGroup>

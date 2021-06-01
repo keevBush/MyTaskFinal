@@ -24,4 +24,7 @@
     <data name="WelcomeBack" xml:space="preserve">
         <value>Welcome back</value>
     </data>
+    <data name="NoTasksStartWithATask" xml:space="preserve">
+        <value>Start your day with a task</value>
+    </data>
 </root>

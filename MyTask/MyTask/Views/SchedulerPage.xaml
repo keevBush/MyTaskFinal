@@ -3,166 +3,329 @@
     x:Class="MyTask.Views.SchedulerPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:MyTask.CustomControls"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
     xmlns:resources="clr-namespace:MyTask.Localizations"
     xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
-    xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
-    xmlns:customControl="clr-namespace:MyTask.CustomControls"
+    BackgroundColor="#F0F2F7"
     ios:Page.UseSafeArea="True">
     <ContentPage.Content>
         <Grid>
-            <Grid
-                RowDefinitions="auto,auto,auto"
-                >
-                <Frame CornerRadius="20"
-                       VerticalOptions="Start"
-                       tk:ShadowEffect.Color="#C1C8D1"
-                       tk:ShadowEffect.Radius="5"
-                       tk:ShadowEffect.OffsetY="5"
-                       tk:ShadowEffect.Opacity="0.3"
-                       Margin="0,-15,0,0"
-                       Padding="0,20,0,5"
-                       >
-                    <Grid
-                        RowDefinitions="auto,auto,auto,auto"
-                        >
-                        <Grid
-                            Margin="20,0"
-                            ColumnDefinitions="*,*,*"
-                            >
+            <Grid RowDefinitions="auto,auto,auto">
+                <Frame
+                    Margin="0,-15,0,0"
+                    Padding="0,20,0,5"
+                    tk:ShadowEffect.Color="#C1C8D1"
+                    tk:ShadowEffect.OffsetY="5"
+                    tk:ShadowEffect.Opacity="0.3"
+                    tk:ShadowEffect.Radius="5"
+                    CornerRadius="20"
+                    VerticalOptions="Start">
+                    <Grid RowDefinitions="auto,auto,auto,auto">
+                        <Grid Margin="20,0" ColumnDefinitions="*,*,*">
                             <ImageButton
-                                HorizontalOptions="Start"
-                                Padding="15"
                                 Margin="-8,0,0,0"
-                                WidthRequest="60"
+                                Padding="15"
+                                tk:TouchEffect.NormalAnimationDuration="200"
                                 tk:TouchEffect.NormalBackgroundColor="Transparent"
+                                tk:TouchEffect.PressedAnimationDuration="60"
                                 tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
                                 tk:TouchEffect.PressedScale="0.8"
-                                tk:TouchEffect.PressedAnimationDuration="60"
-                                tk:TouchEffect.NormalAnimationDuration="200"
-                                CornerRadius="20"
                                 BackgroundColor="White"
-                                VerticalOptions="Center"
+                                CornerRadius="20"
+                                HorizontalOptions="Start"
                                 Source="{local:ImageResource MyTask.Resources.Images.squared_menu_filled.png}"
-                                />
+                                VerticalOptions="Center"
+                                WidthRequest="60" />
                             <Label
                                 Grid.Column="1"
-                                Text="My task"
                                 Style="{StaticResource LabelTitle}"
-                                VerticalOptions="Center"
-                                />
+                                Text="My task"
+                                VerticalOptions="Center" />
                             <tk:AvatarView
-                                HorizontalOptions="End"
                                 Grid.Column="2"
-                                Color="{Binding Color}"
+                                tk:TouchEffect.NormalAnimationDuration="200"
+                                tk:TouchEffect.PressedAnimationDuration="200"
                                 tk:TouchEffect.PressedScale="1.2"
+                                FontFamily="ProductSans-Medium"
                                 FontSize="20"
+                                HorizontalOptions="End"
                                 Text="{Binding FirstLetter}"
                                 TextColor="White"
-                                tk:TouchEffect.PressedAnimationDuration="200"
-                                tk:TouchEffect.NormalAnimationDuration="200"
-                                FontFamily="ProductSans-Medium"
                                 VerticalOptions="Center"
-                                />
+                                Color="{Binding Color}" />
                         </Grid>
                         <Label
                             Grid.Row="1"
                             Margin="20,0,0,0"
-                            Style="{StaticResource LabelSubTitle}"
                             FontSize="Body"
-                            >
+                            Style="{StaticResource LabelSubTitle}">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span 
-                                        FontSize="Body"
-                                        FontFamily="ProductSans-Regular"
-                                        Text="{x:Static resources:AppResources.WelcomeBack} "/>
-                                    <Span Text=" "/>
                                     <Span
+                                        FontFamily="ProductSans-Regular"
                                         FontSize="Body"
+                                        Text="{x:Static resources:AppResources.WelcomeBack}" />
+                                    <Span Text=" " />
+                                    <Span
                                         FontAttributes="Bold"
-                                        Text="{Binding Username}" FontFamily="ProductSans-Medium"/>
+                                        FontFamily="ProductSans-Medium"
+                                        FontSize="Body"
+                                        Text="{Binding Username}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <customControl:MyTaskCalendar
-                            Grid.Row="2"
-                            />
+                        <customControl:MyTaskCalendar Grid.Row="2" />
                     </Grid>
-                    
+
                 </Frame>
-                <Grid
+                <RefreshView
                     Grid.Row="1"
-                    RowSpacing="0" 
-                    Padding="0" 
-                    ColumnSpacing="0" 
-                    Margin="0"
+                    IsRefreshing="{Binding IsRunning}"
+                    Command="{Binding RefreshCommand}"
                     >
-                    <CollectionView
-                        Margin = "0"
-                        VerticalOptions="Start"
-                        ItemsSource="{Binding Tasks}"
-                        >
-                        <CollectionView.Header>
-                            <Grid
-                                Padding="10,0,0,0"
-                                >
-                                <Label 
-                                    Style="{StaticResource LabelSubTitle}"
-                                    FontFamily="ProductSans-Medium"
-                                    Text="{x:Static resources:AppResources.DailyTask}"
-                                />
-                            </Grid>
-                        </CollectionView.Header>
-                        <CollectionView.EmptyView>
-                            <Grid
-                                RowDefinitions="auto,auto"
-                                >
-                                <Image
-                                    Margin="0,30,0,0"
-                                    WidthRequest="80"
-                                    HeightRequest="80"
-                                    HorizontalOptions="Center"
-                                    Source="{local:ImageResource MyTask.Resources.Images.no_tasks.png}"
-                                    />
-                                <Label
-                                    Grid.Row="1"
-                                    TextColor="#66768E"
-                                    HorizontalOptions="Center"
-                                    Margin="0,10,0,0"
-                                    FontSize="Subtitle"
-                                    Opacity="0.7"
-                                    FontFamily="ProductSans-Medium"
-                                    Text="No task created for this day"
-                                    />
-                            </Grid>
-                        </CollectionView.EmptyView>
-                    </CollectionView>
-                    
-                </Grid>
+                    <Grid
+                        Margin="10,10,10,0"
+                        Padding="0"
+                        ColumnSpacing="0"
+                        RowSpacing="0">
+                        <CollectionView
+                            Margin="0"
+                            ItemsSource="{Binding Tasks}"
+                            VerticalOptions="Start">
+                            <CollectionView.Header>
+                                <Grid Padding="10,0,10,10">
+                                    <Label
+                                        FontFamily="ProductSans-Medium"
+                                        Style="{StaticResource LabelSubTitle}"
+                                        Text="{x:Static resources:AppResources.DailyTask}" />
+                                </Grid>
+                            </CollectionView.Header>
+                            <CollectionView.EmptyView>
+                                <Grid RowDefinitions="auto,auto">
+                                    <Image
+                                        Margin="0,30,0,0"
+                                        HeightRequest="80"
+                                        HorizontalOptions="Center"
+                                        Source="{local:ImageResource MyTask.Resources.Images.no_tasks.png}"
+                                        WidthRequest="80" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Margin="0,10,0,0"
+                                        FontFamily="ProductSans-Medium"
+                                        FontSize="Subtitle"
+                                        HorizontalOptions="Center"
+                                        Opacity="0.7"
+                                        Text="{x:Static resources:AppResources.NoTasksStartWithATask}"
+                                        TextColor="#66768E" />
+                                </Grid>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                   <Grid
+                                       RowDefinitions="auto,*"
+
+                                       >
+                                       <Grid
+                                           ColumnDefinitions="auto,*">
+                                           <Label
+                                               Margin="10,0,0,0"
+                                               Style="{StaticResource LabelBold}"
+                                               Text="{Binding CreatedAt, StringFormat='{0:h:mm tt}'}"
+                                               TextColor="{StaticResource BlackColorLight}"
+                                               Opacity="0.7"
+                                               />
+                                           <BoxView
+                                               BackgroundColor="#CDD5E0"
+                                               VerticalOptions="Center"
+                                               HeightRequest="1"
+                                               Grid.Column="1"
+                                               Margin="10,0,10,0"
+                                               />
+                                       </Grid>
+                                       <SwipeView
+                                           Grid.Row="1"
+                                           >
+                                           <SwipeView.RightItems>
+                                               <SwipeItemView>
+                                                   <Grid ColumnDefinitions="auto,auto">
+                                                       <Button
+                                                           Text="show"
+                                                           
+                                                           />
+                                                       <Button
+                                                           Grid.Column="1"
+                                                           Text="delete"
+                                                           />
+                                                   </Grid>
+                                               </SwipeItemView>
+                                           </SwipeView.RightItems>
+                                           <Grid
+                                              Padding="10,10"
+                                              >
+                                              <Frame
+                                                  HasShadow="False"
+                                                  tk:ShadowEffect.Color="#C1C8D1"
+                                                  tk:ShadowEffect.OffsetY="5"
+                                                  tk:ShadowEffect.Opacity="0.3"
+                                                  tk:ShadowEffect.Radius="5"
+                                                  CornerRadius="20"
+                                                  BackgroundColor="White">
+                                                  <Grid
+                                                      ColumnDefinitions="auto,*,auto"
+                                                  >
+                                                      <tk:AvatarView
+                                                          Text="T"
+                                                          VerticalOptions="Center"
+                                                      />
+                                                      <Grid
+                                                          VerticalOptions="Center"
+                                                          Grid.Column="1"
+                                                          Margin="10,0"
+                                                          RowDefinitions="auto,auto"
+                                                          >
+                                                          <Label
+                                                              Style="{StaticResource LabelBold}"
+                                                              Text="{Binding Name}"
+                                                              FontSize="13"
+                                                              TextColor="{StaticResource BlackColorLight}"
+                                                              />
+                                                          <Frame
+                                                              Grid.Row="1"
+                                                              HasShadow="False"
+                                                              HorizontalOptions="Start"
+                                                              Padding="5"
+                                                              tk:TouchEffect.NormalAnimationDuration="200"
+                                                              tk:TouchEffect.NormalBackgroundColor="Transparent"
+                                                              tk:TouchEffect.PressedAnimationDuration="60"
+                                                              tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
+                                                              tk:TouchEffect.PressedScale="0.8"
+                                                              BorderColor="#D8E6FC"
+                                                              >
+                                                              <Grid
+                                                                  ColumnSpacing="3"
+                                                                  ColumnDefinitions="auto,auto,auto,auto,auto,auto,auto,auto"
+                                                                  >
+                                                                  <Image
+                                                                      WidthRequest="15"
+                                                                      VerticalOptions="Center"
+                                                                      Source="{local:ImageResource MyTask.Resources.Images.tasks_list.png}"
+                                                                      />
+                                                                  <Label
+                                                                      Grid.Column="1"
+                                                                      Style="{StaticResource LabelBold}"
+                                                                      FontSize="12"
+                                                                      TextColor="#66768E"
+                                                                      VerticalOptions="Center"
+                                                                      Text="{Binding Steps.Count}"
+                                                                      />
+                                                                  <BoxView
+                                                                      Grid.Column="2"
+                                                                      HorizontalOptions="Center"
+                                                                      WidthRequest="2"
+                                                                      HeightRequest="17"
+                                                                      Color="#D8E6FC"
+                                                                      />
+                                                                  <Image
+                                                                      WidthRequest="15"
+                                                                      VerticalOptions="Center"                                                                      
+                                                                      Grid.Column="3"
+                                                                      Source="{local:ImageResource MyTask.Resources.Images.tasks_completed.png}"
+                                                                  />
+                                                                  <Label
+                                                                      Grid.Column="4"
+                                                                      Style="{StaticResource LabelBold}"
+                                                                      FontSize="12"
+                                                                      TextColor="#5DCD5C"
+                                                                      VerticalOptions="Center"
+                                                                      Text="{Binding Steps.Count}"
+                                                                  />
+                                                                  <BoxView
+                                                                      Grid.Column="5"
+                                                                      HorizontalOptions="Center"
+                                                                      HeightRequest="1"
+                                                                      WidthRequest="2"
+                                                                      Color="#D8E6FC"
+                                                                  />
+                                                                  <Image
+                                                                      WidthRequest="15"
+                                                                      VerticalOptions="Center"                                                                      
+                                                                      Grid.Column="6"
+                                                                      Source="{local:ImageResource MyTask.Resources.Images.tasks_not_completed.png}"
+                                                                  />
+                                                                  <Label
+                                                                      Grid.Column="7"
+                                                                      Style="{StaticResource LabelBold}"
+                                                                      FontSize="12"
+                                                                      VerticalOptions="Center"
+                                                                      TextColor="#BC5770"
+                                                                      Text="{Binding Steps.Count}"
+                                                                  />
+                                                              </Grid>
+                                                          </Frame>
+                                                      </Grid>
+                                                      <Frame
+                                                              Grid.Column="2"
+                                                              VerticalOptions="Center"
+                                                              HasShadow="False"
+                                                              HorizontalOptions="Start"
+                                                              Padding="10,5"
+                                                              tk:TouchEffect.NormalAnimationDuration="200"
+                                                              tk:TouchEffect.NormalBackgroundColor="Transparent"
+                                                              tk:TouchEffect.PressedAnimationDuration="60"
+                                                              tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
+                                                              tk:TouchEffect.PressedScale="0.8"
+                                                              BorderColor="#D8E6FC"
+                                                              >
+                                                              <Grid
+                                                                  ColumnDefinitions="auto,*"
+                                                                  >
+                                                                  <Image
+                                                                      WidthRequest="15"
+                                                                      Source="{local:ImageResource MyTask.Resources.Images.remember_date.png}"
+                                                                      />
+                                                                  <Label
+                                                                      Grid.Column="1"
+                                                                      FontSize="12"
+                                                                      Style="{StaticResource LabelSubTitle}"
+                                                                      TextColor="#66768E"
+                                                                      VerticalOptions="Center"
+                                                                      Text="{Binding CreatedAt, StringFormat='{0:MM/dd/yyyy}'}"
+                                                                      />
+                                                              </Grid>
+                                                          </Frame>
+                                                  </Grid>
+                                              </Frame>
+
+                                          </Grid>
+                                       </SwipeView>
+                                       
+                                   </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </RefreshView>
             </Grid>
             <ImageButton
-                HorizontalOptions="End"
-                        
-                Padding="10"
                 Margin="0,0,10,10"
-                WidthRequest="55"
-                tk:TouchEffect.NormalBackgroundColor="{StaticResource BaseColorLight}"
-                tk:TouchEffect.PressedBackgroundColor="#AFB8EA"
-                tk:TouchEffect.PressedScale="0.8"
-                tk:TouchEffect.PressedAnimationDuration="60"
-                tk:TouchEffect.NormalAnimationDuration="200"
-                
+                Padding="10"
                 tk:ShadowEffect.Color="#AFB8EA"
-                tk:ShadowEffect.Radius="5"
                 tk:ShadowEffect.OffsetY="5"
                 tk:ShadowEffect.Opacity="0.6"
-
-                CornerRadius="20"
+                tk:ShadowEffect.Radius="5"
+                tk:TouchEffect.NormalAnimationDuration="200"
+                tk:TouchEffect.NormalBackgroundColor="{StaticResource BaseColorLight}"
+                tk:TouchEffect.PressedAnimationDuration="60"
+                tk:TouchEffect.PressedBackgroundColor="#AFB8EA"
+                tk:TouchEffect.PressedScale="0.8"
                 Command="{Binding NewTaskPopupCommand}"
-                VerticalOptions="End"
+                CornerRadius="20"
+                HorizontalOptions="End"
                 Source="{local:ImageResource MyTask.Resources.Images.white_plus.png}"
-            />
+                VerticalOptions="End"
+                WidthRequest="55" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

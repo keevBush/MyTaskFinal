@@ -56,5 +56,11 @@ namespace MyTask.Localizations {
                 return ResourceManager.GetString("WelcomeBack", resourceCulture);
             }
         }
+        
+        internal static string NoTasksStartWithATask {
+            get {
+                return ResourceManager.GetString("NoTasksStartWithATask", resourceCulture);
+            }
+        }
     }
 }
