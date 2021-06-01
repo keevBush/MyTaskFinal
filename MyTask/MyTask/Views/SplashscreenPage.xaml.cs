@@ -22,8 +22,13 @@ namespace MyTask.Views
             base.OnAppearing();
             //BindingContext = new ViewModels.SplashscreenViewModel(_userRepository, _navigationService);
         }
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+        }
+
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            await this.ShowSuccessSnackBarAsync("cooool", SnackbarDuration.Long);
         }
     }
 }

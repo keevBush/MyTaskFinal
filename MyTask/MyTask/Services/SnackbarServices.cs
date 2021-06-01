@@ -36,7 +36,7 @@ namespace MyTask.Services
             await page.DisplayToastAsync(options);
         }
 
-        public async static Task ShowWarningSnackBarAsync(this Page page, string message, SnackbarDuration duration = SnackbarDuration.Short)
+        public static async  Task ShowWarningSnackBarAsync(this Page page, string message, SnackbarDuration duration = SnackbarDuration.Short)
         {
             var messageOptions = new MessageOptions
             {
@@ -53,7 +53,7 @@ namespace MyTask.Services
             await page.DisplayToastAsync(options);
         }
 
-        public async static Task ShowErrorSnackBarAsync(this Page page, string message, SnackbarDuration duration = SnackbarDuration.Short)
+        public static async  Task ShowErrorSnackBarAsync(this Page page, string message, SnackbarDuration duration = SnackbarDuration.Short)
         {
             var messageOptions = new MessageOptions
             {
@@ -70,21 +70,23 @@ namespace MyTask.Services
             await page.DisplayToastAsync(options);
         }
 
-        public async static Task ShowSuccessSnackBarAsync(this Page page, string message, SnackbarDuration duration = SnackbarDuration.Short)
+        public static async  Task ShowSuccessSnackBarAsync(this Page page, string message, SnackbarDuration duration = SnackbarDuration.Short)
         {
             var messageOptions = new MessageOptions
             {
                 Foreground = Color.White,
                 Message = message
             };
-            var options = new ToastOptions
+            
+            var options = new SnackBarOptions()
             {
                 MessageOptions = messageOptions,
                 Duration = duration == SnackbarDuration.Long ? TimeSpan.FromMilliseconds(5000) : TimeSpan.FromMilliseconds(2500),
                 BackgroundColor = Color.FromHex("20be28"),
                 IsRtl = false,
+
             };
-            await page.DisplayToastAsync(options);
+            await page.DisplaySnackBarAsync(options);
         }
     }
 }

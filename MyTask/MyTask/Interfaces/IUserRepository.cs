@@ -1,10 +1,10 @@
-﻿using MyTasks.Models;
+﻿using MyTask.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyTasks.Core.Data.Interfaces
+namespace MyTask.Core.Data.Interfaces
 {
     public interface IUserRepository
     {

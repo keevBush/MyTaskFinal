@@ -1,6 +1,6 @@
 ﻿using MyTask.Repositories;
 using MyTask.Services;
-using MyTasks.Core.Data.Interfaces;
+using MyTask.Core.Data.Interfaces;
 using Prism.AppModel;
 using Prism.Navigation;
 using System;
@@ -48,7 +48,7 @@ namespace MyTask.ViewModels
                     return;
                 }
 
-                await _navigationService.NavigateAsync("/scheduler-view");
+                await _navigationService.NavigateAsync("/scheduler-view",null,false,true);
             }
             catch (Exception e)
             {

@@ -9,6 +9,13 @@ namespace MyTask.ViewModels
 {
     public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
     {
+        private bool _isRunning;
+
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set => SetProperty(ref _isRunning, value, "IsRunning");
+        }
         protected INavigationService NavigationService { get; private set; }
 
         private string _title;

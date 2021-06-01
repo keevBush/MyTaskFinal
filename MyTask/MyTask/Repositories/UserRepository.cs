@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 //using MyTask.Core.Data.Interfaces;
 //using MyTask.Core.Data.Models;
 using MyTask.Utils;
-using MyTasks.Core.Data.Interfaces;
-using MyTasks.Models;
+using MyTask.Core.Data.Interfaces;
+using MyTask.Models;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 

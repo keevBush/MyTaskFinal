@@ -94,8 +94,6 @@
                     Margin="0,0,0,40"
                     />
             </Grid>
-
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

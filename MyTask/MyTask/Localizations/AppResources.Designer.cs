@@ -44,5 +44,23 @@ namespace MyTask.Localizations {
                 resourceCulture = value;
             }
         }
+        
+        internal static string DailyTask {
+            get {
+                return ResourceManager.GetString("DailyTask", resourceCulture);
+            }
+        }
+        
+        internal static string WelcomeBack {
+            get {
+                return ResourceManager.GetString("WelcomeBack", resourceCulture);
+            }
+        }
+        
+        internal static string NoTasksStartWithATask {
+            get {
+                return ResourceManager.GetString("NoTasksStartWithATask", resourceCulture);
+            }
+        }
     }
 }

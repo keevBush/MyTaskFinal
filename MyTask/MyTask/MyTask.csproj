@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.2.0" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="4.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="8.0.76" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.11" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
@@ -41,6 +42,22 @@
     <EmbeddedResource Include="Resources\Images\squared_menu_filled.png" />
     <None Remove="Resources\Images\sort_down.png" />
     <EmbeddedResource Include="Resources\Images\sort_down.png" />
+    <None Remove="Resources\Images\icons8-task.png" />
+    <EmbeddedResource Include="Resources\Images\no_tasks.png" />
+    <None Remove="Resources\Images\icons8-plus_math.png" />
+    <EmbeddedResource Include="Resources\Images\white_plus.png" />
+    <None Remove="Resources\Images\gray_plus.png" />
+    <EmbeddedResource Include="Resources\Images\gray_plus.png" />
+    <None Remove="Resources\Images\icons8-checkmark.png" />
+    <EmbeddedResource Include="Resources\Images\checkmark.png" />
+    <None Remove="Resources\Images\icons8-ingredients_list.png" />
+    <EmbeddedResource Include="Resources\Images\tasks_list.png" />
+    <None Remove="Resources\Images\icons8-task_completed.png" />
+    <EmbeddedResource Include="Resources\Images\tasks_completed.png" />
+    <None Remove="Resources\Images\icons8-cancel_subscription.png" />
+    <EmbeddedResource Include="Resources\Images\tasks_not_completed.png" />
+    <None Remove="Resources\Images\icons8-important_month.png" />
+    <EmbeddedResource Include="Resources\Images\remember_date.png" />
   </ItemGroup>
 
   <ItemGroup>
