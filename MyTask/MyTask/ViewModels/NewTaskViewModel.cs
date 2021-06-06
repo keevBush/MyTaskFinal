@@ -2,22 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using MyTask.Models;
 using MyTask.Repositories;
 using MyTask.Services;
 using Prism.Navigation;
-using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
-using Task = System.Threading.Tasks.Task;
 
 namespace MyTask.ViewModels
 {
     public class NewTaskViewModel:ViewModelBase
     {
+        private DateTime _currentDate;
 
+        private DateTime CurrentDate
+        {
+            get => _currentDate;
+            set => SetProperty(ref _currentDate, value, "CurrentDate");
+        }
         private string _name;
-
         public string Name
         {
             get => _name;
@@ -60,14 +62,17 @@ namespace MyTask.ViewModels
                     Description = "",
                     Labels = new List<string>(),
                     Steps = Steps.ToList(),
+                    CreatedAt = CurrentDate
+                    
                 };
-                for (int i = 0; i < Steps.Count; i++)
+                
+                for (var i = 0; i < Steps.Count; i++)
                 {
                     Steps[i].Task = task;
                 }
                 await _stepRepository.CreateAsync(Steps.ToArray());
+                await _taskRepository.CreateAsync(task);
                 MessagingCenter.Instance.Send(this,"update-tasks");
-                //await _taskRepository.CreateAsync(task);
                 await _navigationService.GoBackAsync();
             }
             catch (Exception e)
@@ -81,11 +86,20 @@ namespace MyTask.ViewModels
 
         private void ExecuteAddStepCommand(object parameter)
         {
+            var count = Steps.Count == 0 ? 1 : Steps.Count + 1;
             Steps.Add(new Step()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = $"Name {Steps.Count - 1}"
+                Name = $"Name {count}"
             });
+        }
+
+        public override void Initialize(INavigationParameters parameters)
+        {
+            var currentDate = parameters["currentDate"];
+            CurrentDate = (DateTime) currentDate;
+            
+            base.Initialize(parameters);
         }
 
         private  void ExecuteDeleteCurrentStepCommand(string parameter)
@@ -93,11 +107,6 @@ namespace MyTask.ViewModels
          
             var index = Steps.Select(i => i.Id).ToList().IndexOf(parameter);
             Steps.RemoveAt(index);
-        }
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-            //var test = parameters["xks"];
         }
     }
 }

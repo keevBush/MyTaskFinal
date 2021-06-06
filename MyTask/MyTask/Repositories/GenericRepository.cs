@@ -38,7 +38,6 @@ namespace MyTask.Repositories
             var type = typeof(TModel);
             var name = type.Name;
             var collections = DatabaseService.Database.GetCollectionNames();
-            var tasks = DatabaseService.Database.GetCollection("Tasks").FindAll().ToList();
            var data = await System.Threading.Tasks.Task.Run(() =>  DatabaseService.Database
                     .GetCollection<TModel>($"{name}s").FindAll().ToList()
             );

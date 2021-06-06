@@ -9,7 +9,11 @@
     xmlns:resources="clr-namespace:MyTask.Localizations"
     xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="#F0F2F7"
+    xmlns:converters="clr-namespace:MyTask.Converters;assembly=MyTask"
     ios:Page.UseSafeArea="True">
+    <ContentPage.Resources>
+        <converters:NewTaskCurrentDateTodayVisibilityConverter x:Key="NewTaskCurrentDateTodayVisibilityConverter"/>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid RowDefinitions="auto,auto,auto">
@@ -76,7 +80,9 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <customControl:MyTaskCalendar Grid.Row="2" />
+                        <customControl:MyTaskCalendar 
+                            CurrentDateChangedCommand="{Binding CurrentDateChangedCommand}"
+                            Grid.Row="2" />
                     </Grid>
 
                 </Frame>
@@ -323,6 +329,7 @@
                 Command="{Binding NewTaskPopupCommand}"
                 CornerRadius="20"
                 HorizontalOptions="End"
+                IsVisible="{Binding CurrentDate, Converter={StaticResource NewTaskCurrentDateTodayVisibilityConverter}}"
                 Source="{local:ImageResource MyTask.Resources.Images.white_plus.png}"
                 VerticalOptions="End"
                 WidthRequest="55" />

@@ -67,7 +67,7 @@
                 >
                 <CarouselView.PeekAreaInsets>
                     <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="iOS" Value="0,125" />
+                        <On Platform="iOS" Value="0,130" />
                         <On Platform="Android" Value="0,100" />
                     </OnPlatform>
                 </CarouselView.PeekAreaInsets>
