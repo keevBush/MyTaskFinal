@@ -1,217 +1,203 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      RowDefinitions="auto,*"
-             xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
-      xmlns:converters="clr-namespace:MyTask.Converters"
-      xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
-      x:Name="page"
-      xmlns:templateSelector="clr-namespace:MyTask.DataTemplateSelectors;assembly=MyTask"
-             x:Class="MyTask.CustomControls.MyTaskCalendar">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="MyTask.CustomControls.MyTaskCalendar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MyTask.Converters"
+    xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
+    xmlns:templateSelector="clr-namespace:MyTask.DataTemplateSelectors;assembly=MyTask"
+    xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="page"
+    RowDefinitions="auto,*">
     <Grid.Resources>
+        <converters:CalendarCurrentDateSelectedShadowConverter x:Key="CalendarCurrentDateSelectedShadowConverter"/>
+        <converters:CalendarCurrentDateSelectedTextColorConverter x:Key="CalendarCurrentDateSelectedTextColorConverter"/>
+        <converters:CalendarCurrentDateSelectedBackgroundColorConverter x:Key="CalendarCurrentDateSelectedBackgroundColor" />
         <converters:DayOfWeekThreeCharacterConverter x:Key="DayOfWeekThreeCharacterConverter" />
         <DataTemplate x:Key="CurrentDate">
-            <Grid
-                BackgroundColor="Transparent"
-            >
+            <Grid BackgroundColor="Transparent">
                 <Frame
-                    Padding="10"
-                    CornerRadius="20"
-                    BindingContext="{Binding .}"
-                    BackgroundColor="#5C72EF"
                     Margin="5,2"
-                    WidthRequest="35"
-                    tk:TouchEffect.PressedScale="0.8"
-                    tk:TouchEffect.PressedAnimationDuration="60"
-                    tk:TouchEffect.NormalAnimationDuration="200"
-                    
+                    Padding="10"
                     tk:ShadowEffect.Color="#AFB8EA"
-                    tk:ShadowEffect.Radius="5"
                     tk:ShadowEffect.OffsetY="5"
                     tk:ShadowEffect.Opacity="0.6"
-                    HasShadow="False"
-                    HeightRequest="35"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                >
-                    <Grid
-                        RowSpacing="-1"
-                        RowDefinitions="auto,auto"
-                    >
-
-                        <Label
-                            Text="{Binding DayOfWeek, Converter={StaticResource DayOfWeekThreeCharacterConverter}}"
-                            TextColor="White"
-                            FontSize="10"
-                            FontFamily="ProductSans-Regular"
-                            HorizontalOptions="Center"
-                            Opacity="0.8"
-                        />
-                        <Label
-                            TextColor="White"
-                            VerticalOptions="Center"
-                            FontSize="20"
-                            Margin="0,0,0,0"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            FontFamily="ProductSans-Medium"
-                            Text="{Binding Day}"
-                            Grid.Row="1"
-                        />
-                    </Grid>
-                </Frame>
-            </Grid>
-        </DataTemplate>
-        
-        <DataTemplate x:Key="DateNotSelected">
-            <Grid>
-                <Frame
-                    Padding="10"
-                    CornerRadius="20"
-                    BackgroundColor="#FAFBFF"
-                    Margin="5,2"
-                    WidthRequest="35"
-                    BindingContext="{Binding .}"
-                    tk:TouchEffect.PressedScale="0.8"
-                    tk:ShadowEffect.Color="#C1C8D1"
                     tk:ShadowEffect.Radius="5"
-                    tk:ShadowEffect.OffsetY="5"
-                    tk:ShadowEffect.Opacity="0.6"
-                    tk:TouchEffect.PressedAnimationDuration="60"
                     tk:TouchEffect.NormalAnimationDuration="200"
+                    tk:TouchEffect.PressedAnimationDuration="60"
+                    tk:TouchEffect.PressedScale="0.8"
+                    BackgroundColor="#5C72EF"
+                    BindingContext="{Binding .}"
+                    CornerRadius="20"
                     HasShadow="False"
                     HeightRequest="35"
                     HorizontalOptions="Center"
                     VerticalOptions="Start"
-                >
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="TapGestureRecognizer_OnTapped"
-                            />
-                    </Frame.GestureRecognizers>
-                    <Grid
-                        RowSpacing="-1"
-                        RowDefinitions="auto,auto"
-                    >
+                    WidthRequest="35">
+                    <Grid RowDefinitions="auto,auto" RowSpacing="-1">
 
                         <Label
-                            Text="{Binding DayOfWeek, Converter={StaticResource DayOfWeekThreeCharacterConverter}}"
-                            TextColor="#1E2736"
-                            FontSize="10"
                             FontFamily="ProductSans-Regular"
+                            FontSize="10"
                             HorizontalOptions="Center"
                             Opacity="0.8"
-                        />
+                            Text="{Binding DayOfWeek, Converter={StaticResource DayOfWeekThreeCharacterConverter}}"
+                            TextColor="White" />
                         <Label
-                            TextColor="Black"
-                            VerticalOptions="Center"
-                            FontSize="20"
+                            Grid.Row="1"
                             Margin="0,0,0,0"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
                             FontFamily="ProductSans-Medium"
+                            FontSize="20"
+                            HorizontalOptions="Center"
                             Text="{Binding Day}"
-                            Grid.Row="1"
-                        />
+                            TextColor="White"
+                            VerticalOptions="Center" />
                     </Grid>
                 </Frame>
             </Grid>
         </DataTemplate>
-        <templateSelector:CalendarDateTemplateSelector
-            x:Key="DateTemplateSelector"
-            x:Name="selector"
-            DateNotSelected="{StaticResource DateNotSelected}"
-            CurrentDate="{StaticResource CurrentDate}"
-            />
-        <converters:MonthInToStringConverter
-            
-            x:Key="MonthInToString" />
+        <converters:MonthInToStringConverter x:Key="MonthInToString" />
     </Grid.Resources>
-    <Grid
-        Margin="20,0"
-        ColumnDefinitions="*,auto"
-        >
+    <Grid Margin="20,0" ColumnDefinitions="*,auto">
         <Label
+            FontAttributes="Bold"
+            FontFamily="ProductSans-Medium"
+            FontSize="Title"
             Text="Scheduler"
             TextColor="#1E2736"
-            FontFamily="ProductSans-Medium"
-            VerticalOptions="Center"
-            FontAttributes="Bold"
-            FontSize="Title"
-            />
+            VerticalOptions="Center" />
         <Frame
-            HasShadow="False"
-            CornerRadius="26"
-            Padding="25,5,15,5"
-            Grid.Column="1"
-            BorderColor="#D0DDED"
             x:Name="monthYearView"
+            Grid.Column="1"
+            Padding="25,5,15,5"
+            tk:TouchEffect.NormalAnimationDuration="200"
             tk:TouchEffect.NormalBackgroundColor="Transparent"
+            tk:TouchEffect.PressedAnimationDuration="60"
             tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
             tk:TouchEffect.PressedScale="0.8"
-            tk:TouchEffect.PressedAnimationDuration="60"
-            tk:TouchEffect.NormalAnimationDuration="200"
-        >
+            BorderColor="#D0DDED"
+            CornerRadius="26"
+            HasShadow="False">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer
-                    Tapped="MonthYearTapGestureRecognizer_OnTapped"
-                    />
+                <TapGestureRecognizer Tapped="MonthYearTapGestureRecognizer_OnTapped" />
             </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="*,auto">
                 <Grid
-                    RowSpacing="0"
                     Margin="5,0,0,0"
                     RowDefinitions="auto,auto"
-                    >
-                    <Label 
-                        FontFamily="ProductSans-Medium"
-                        Text="{Binding Source={x:Reference page}, Path=CurrentDate.Month, Converter={StaticResource MonthInToString} }"
+                    RowSpacing="0">
+                    <Label
                         x:Name="labelMonth"
+                        FontFamily="ProductSans-Medium"
                         FontSize="Body"
-                        TextColor="#1E2736"
-                       />
-                    <Label 
-                        Text="{Binding Source={x:Reference page}, Path=CurrentDate.Year }"
-                        FontSize="Body"
-                        FontFamily="ProductSans-Regular"
-                        Opacity="0.8"
-                        Grid.Row="1"
+                        Text="{Binding Source={x:Reference page}, Path=CurrentDate.Month, Converter={StaticResource MonthInToString}}"
+                        TextColor="#1E2736" />
+                    <Label
                         x:Name="labelYear"
-                        TextColor="#1E2736"
-                       />
+                        Grid.Row="1"
+                        FontFamily="ProductSans-Regular"
+                        FontSize="Body"
+                        Opacity="0.8"
+                        Text="{Binding Source={x:Reference page}, Path=CurrentDate.Year}"
+                        TextColor="#1E2736" />
                 </Grid>
                 <Image
                     Grid.Column="1"
                     Margin="5,0,8,0"
                     Source="{local:ImageResource MyTask.Resources.Images.sort_down.png}"
-                    WidthRequest="15"
-                    />
+                    WidthRequest="15" />
             </Grid>
         </Frame>
     </Grid>
-        <CollectionView
-            Grid.Row ="1"
-            HorizontalOptions="Fill"
-            SelectionMode="None"
-            ItemSizingStrategy="MeasureFirstItem"
-            IsInNativeLayout="True"
-            Margin="0,10,0,0"
-            x:Name="days"
-            BackgroundColor="Transparent"
-            HeightRequest="70"
-            ItemTemplate="{StaticResource DateTemplateSelector}"
-            HorizontalScrollBarVisibility="Always"
-            ItemsUpdatingScrollMode="KeepLastItemInView"
-        >
-            <CollectionView.Header>
-                <BoxView
-                    WidthRequest="10"
-                    HorizontalOptions="Fill"
-                    Margin="0,0,0,0"
-                    />
-            </CollectionView.Header>
-            <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="15" />
+    <CollectionView
+        x:Name="days"
+        Grid.Row="1"
+        Margin="0,10,0,0"
+        BackgroundColor="Transparent"
+        HeightRequest="70"
+        HorizontalOptions="Fill"
+        HorizontalScrollBarVisibility="Always"
+        IsInNativeLayout="True"
+        ItemSizingStrategy="MeasureFirstItem"
+        ItemsUpdatingScrollMode="KeepLastItemInView"
+        SelectionMode="None">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout ItemSpacing="15" Orientation="Horizontal" />
         </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Frame
+                    x:Name="frm"
+                    Margin="5,2"
+                    Padding="10"
+
+                    tk:ShadowEffect.OffsetY="5"
+                    tk:ShadowEffect.Opacity="0.6"
+                    tk:ShadowEffect.Radius="5"
+                    tk:TouchEffect.NormalAnimationDuration="200"
+                    tk:TouchEffect.PressedAnimationDuration="60"
+                    tk:TouchEffect.PressedScale="0.8"
+                    CornerRadius="20"
+                    BindingContext="{Binding .}"
+                    HasShadow="False"
+                    HeightRequest="35"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    WidthRequest="35">
+                        <tk:ShadowEffect.Color>
+                            <MultiBinding Converter="{StaticResource CalendarCurrentDateSelectedShadowConverter}">
+                                <Binding Source="{x:Reference frm}" Path="BindingContext" />
+                                <Binding Path="SelectedItem" Source="{x:Reference days}" />
+                            </MultiBinding>
+                        </tk:ShadowEffect.Color>
+                        <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                    </Frame.GestureRecognizers>
+                    <Frame.BackgroundColor>
+                        <MultiBinding Converter="{StaticResource CalendarCurrentDateSelectedBackgroundColor}">
+                            <Binding Source="{x:Reference frm}" Path="BindingContext" />
+                            <Binding Path="SelectedItem" Source="{x:Reference days}" />
+                        </MultiBinding>
+                    </Frame.BackgroundColor>
+                    <Grid RowDefinitions="auto,auto" RowSpacing="-1">
+
+                        <Label
+                            FontFamily="ProductSans-Regular"
+                            FontSize="10"
+                            HorizontalOptions="Center"
+                            Opacity="0.8"
+                            Text="{Binding DayOfWeek, Converter={StaticResource DayOfWeekThreeCharacterConverter}}"
+                            >
+                            <Label.TextColor>
+                                <MultiBinding Converter="{StaticResource CalendarCurrentDateSelectedTextColorConverter}">
+                                    <Binding Source="{x:Reference frm}" Path="BindingContext" />
+                                    <Binding Path="SelectedItem" Source="{x:Reference days}" />
+                                </MultiBinding>
+                            </Label.TextColor>
+                        </Label>
+                        <Label
+                            Grid.Row="1"
+                            Margin="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="ProductSans-Medium"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Text="{Binding Day}"
+                            VerticalOptions="Center" >
+                            <Label.TextColor>
+                                <MultiBinding Converter="{StaticResource CalendarCurrentDateSelectedTextColorConverter}">
+                                    <Binding Source="{x:Reference frm}" Path="BindingContext" />
+                                    <Binding Path="SelectedItem" Source="{x:Reference days}" />
+                                </MultiBinding>
+                            </Label.TextColor>
+                        </Label>
+                    </Grid>
+                </Frame>
+            
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
     </CollectionView>
-    </Grid>
+</Grid>

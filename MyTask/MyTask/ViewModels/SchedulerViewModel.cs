@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using MyTask.Repositories;
 using MyTask.Core.Data.Interfaces;
@@ -14,6 +15,14 @@ namespace MyTask.ViewModels
 {
     public class SchedulerViewModel:ViewModelBase,Prism.AppModel.IPageLifecycleAware
     {
+        private DateTime _currentDate = DateTime.Today;
+
+        public DateTime CurrentDate
+        {
+            get => _currentDate;
+            set => SetProperty(ref _currentDate, value, "CurrentDate");
+        }
+        
         private Color _color;
         public Color Color
         {
@@ -35,7 +44,8 @@ namespace MyTask.ViewModels
             set => SetProperty(ref _firstLetter, value, "FirstLetter");
         }
         public AsyncCommand NewTaskPopupCommand { get; set; }
-
+        public Command RefreshCommand { get; set; }
+        public Command CurrentDateChangedCommand { get; set; }
         public ObservableCollection<Models.Task> Tasks { get; set; }
         private readonly IUserRepository _userRepository;
         private readonly TaskRepository _taskRepository;
@@ -49,7 +59,54 @@ namespace MyTask.ViewModels
 
             Tasks = new ObservableCollection<Models.Task>();
             NewTaskPopupCommand = new AsyncCommand(ExecuteNewTaskPopupCommand);
+            CurrentDateChangedCommand = new Command(ExecuteCurrentDateCommandChanged);
+            RefreshCommand = new Command(ExecuteRefreshCommand);
             MessagingCenter.Instance.Subscribe<ViewModels.NewTaskViewModel>(this,"update-tasks",ExecuteUpdateTasks);
+        }
+
+        private async void ExecuteRefreshCommand(object obj)
+        {
+            try
+            {
+                var tasks = await _taskRepository.
+                GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
+
+                Tasks.Clear();
+
+                foreach (var task in tasks)
+                {
+                    Tasks.Add(task);
+                }
+            }
+            catch (Exception e)
+            {
+                await Application.Current.MainPage.ShowErrorSnackBarAsync(e.Message);
+            }
+            
+        }
+
+        private async void ExecuteCurrentDateCommandChanged(object obj)
+        {
+            try
+            {
+                var currentDate = (DateTime)obj;
+                CurrentDate = currentDate;
+
+                var tasks = await _taskRepository.
+                    GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
+
+                Tasks.Clear();
+
+                foreach (var task in tasks)
+                {
+                    Tasks.Add(task);
+                }
+            }
+            catch (Exception e)
+            {
+                await Application.Current.MainPage.ShowErrorSnackBarAsync(e.Message);
+            }
+
         }
 
         private async void ExecuteUpdateTasks(NewTaskViewModel obj)
@@ -57,7 +114,7 @@ namespace MyTask.ViewModels
             await LoadData();
         }
 
-        public async override void Initialize(INavigationParameters parameters)
+        public  override async void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
             await LoadData();
@@ -72,13 +129,14 @@ namespace MyTask.ViewModels
             FirstLetter = Username.ToUpper()[0].ToString();
             Color = Xamarin.Forms.Color.FromHex(currentUser.Color);
                 
-            Tasks.Clear();
             try
             {
-                var tasks = await _taskRepository.GetAllAync();
-                    //GetAsync(t => t.CreatedAt >= DateTime.Today && t.CreatedAt < DateTime.Today.AddDays(1));
+                var tasks = await _taskRepository.
+                    //GetAllAync();
+                    GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
                 IsRunning = false;
 
+                Tasks.Clear();
                 foreach (var task in tasks)
                 {
                     Tasks.Add(task);
@@ -100,7 +158,7 @@ namespace MyTask.ViewModels
         
         private async Task ExecuteNewTaskPopupCommand()
         {
-            await _navigationService.NavigateAsync("new-task-popup");
+            await _navigationService.NavigateAsync("new-task-popup", ("currentDate",CurrentDate));
         }
 
         public void OnAppearing()

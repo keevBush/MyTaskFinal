@@ -35,4 +35,21 @@
         <Setter Property="FontFamily" Value="ProductSans-Medium"/>
         <Setter Property="TextColor" Value="{StaticResource BlackColorLight}" />
     </Style>
+    
+    <Style TargetType="Frame">
+            <Setter
+                Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup
+                        x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Red"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+    </Style>
 </ResourceDictionary>

@@ -9,16 +9,14 @@ namespace MyTask.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; set; }
         public DateTime Deadline { get; set; }
         public List<string> Labels { get; set; }
 
-        //[BsonRef("Steps")]
         public virtual List<Step> Steps { get; set; }
 
         public Task()
         {
-            CreatedAt = DateTime.Now;
             Deadline = DateTime.MaxValue;
             Labels = new List<string>();
         }

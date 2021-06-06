@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using LiteDB;
+using LiteDB.Engine;
 using MyTask.Models;
 using MyTask.Utils;
 using MyTasks.Core.Data.Interfaces;
@@ -38,7 +40,7 @@ namespace MyTask.Services
                 Password = password
             };
             
-            return  new LiteDatabase(connectionString);
+            return  new LiteDatabase(connectionString, BsonMapper.Global);
 
         }
 
