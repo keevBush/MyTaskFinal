@@ -63,6 +63,9 @@ namespace MyTask.CustomControls
             Dates.Clear();
             foreach (var day in Enumerable.Range(1, DateTime.DaysInMonth(CurrentDate.Year, CurrentDate.Month)))
                 Dates.Add(new DateTime(CurrentDate.Year, CurrentDate.Month, day));
+            
+            days.ScrollTo(CurrentDate.Day - 1, position: ScrollToPosition.Center);
+
         }
 
         private void LoadDays(int year, int month)

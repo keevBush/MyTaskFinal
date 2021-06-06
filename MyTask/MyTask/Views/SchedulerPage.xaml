@@ -152,6 +152,7 @@
                                        </Grid>
                                        <SwipeView
                                            Grid.Row="1"
+                                           VerticalOptions="Start"
                                            >
                                            <SwipeView.RightItems>
                                                <SwipeItemView>

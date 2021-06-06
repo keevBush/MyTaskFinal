@@ -44,7 +44,7 @@ namespace MyTask.ViewModels
             set => SetProperty(ref _firstLetter, value, "FirstLetter");
         }
         public AsyncCommand NewTaskPopupCommand { get; set; }
-        
+        public Command RefreshCommand { get; set; }
         public Command CurrentDateChangedCommand { get; set; }
         public ObservableCollection<Models.Task> Tasks { get; set; }
         private readonly IUserRepository _userRepository;
@@ -60,23 +60,53 @@ namespace MyTask.ViewModels
             Tasks = new ObservableCollection<Models.Task>();
             NewTaskPopupCommand = new AsyncCommand(ExecuteNewTaskPopupCommand);
             CurrentDateChangedCommand = new Command(ExecuteCurrentDateCommandChanged);
+            RefreshCommand = new Command(ExecuteRefreshCommand);
             MessagingCenter.Instance.Subscribe<ViewModels.NewTaskViewModel>(this,"update-tasks",ExecuteUpdateTasks);
+        }
+
+        private async void ExecuteRefreshCommand(object obj)
+        {
+            try
+            {
+                var tasks = await _taskRepository.
+                GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
+
+                Tasks.Clear();
+
+                foreach (var task in tasks)
+                {
+                    Tasks.Add(task);
+                }
+            }
+            catch (Exception e)
+            {
+                await Application.Current.MainPage.ShowErrorSnackBarAsync(e.Message);
+            }
+            
         }
 
         private async void ExecuteCurrentDateCommandChanged(object obj)
         {
-            var currentDate = (DateTime)obj;
-            CurrentDate = currentDate;
-            
-            var tasks = await _taskRepository.
-                GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
-            
-            Tasks.Clear();
-
-            foreach (var task in tasks)
+            try
             {
-                Tasks.Add(task);
+                var currentDate = (DateTime)obj;
+                CurrentDate = currentDate;
+
+                var tasks = await _taskRepository.
+                    GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
+
+                Tasks.Clear();
+
+                foreach (var task in tasks)
+                {
+                    Tasks.Add(task);
+                }
             }
+            catch (Exception e)
+            {
+                await Application.Current.MainPage.ShowErrorSnackBarAsync(e.Message);
+            }
+
         }
 
         private async void ExecuteUpdateTasks(NewTaskViewModel obj)
@@ -99,7 +129,6 @@ namespace MyTask.ViewModels
             FirstLetter = Username.ToUpper()[0].ToString();
             Color = Xamarin.Forms.Color.FromHex(currentUser.Color);
                 
-            Tasks.Clear();
             try
             {
                 var tasks = await _taskRepository.
@@ -107,6 +136,7 @@ namespace MyTask.ViewModels
                     GetAsync(t => t.CreatedAt >= CurrentDate && t.CreatedAt < CurrentDate.AddDays(1));
                 IsRunning = false;
 
+                Tasks.Clear();
                 foreach (var task in tasks)
                 {
                     Tasks.Add(task);
