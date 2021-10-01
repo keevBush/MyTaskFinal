@@ -9,6 +9,7 @@
     xmlns:resources="clr-namespace:MyTask.Localizations"
     xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="#F0F2F7"
+    xmlns:iconsS="clr-namespace:FontAwesome.Solid;assembly=FontAwesome.Solid"
     xmlns:converters="clr-namespace:MyTask.Converters;assembly=MyTask"
     ios:Page.UseSafeArea="True">
     <ContentPage.Resources>
@@ -19,6 +20,7 @@
             <Grid RowDefinitions="auto,auto,auto">
                 <Frame
                     Margin="0,-15,0,0"
+                    BackgroundColor="#2581DD"
                     Padding="0,20,0,5"
                     tk:ShadowEffect.Color="#C1C8D1"
                     tk:ShadowEffect.OffsetY="5"
@@ -39,13 +41,18 @@
                                 BackgroundColor="White"
                                 CornerRadius="20"
                                 HorizontalOptions="Start"
-                                Source="{local:ImageResource MyTask.Resources.Images.squared_menu_filled.png}"
                                 VerticalOptions="Center"
-                                WidthRequest="60" />
+                                WidthRequest="60" >
+                                <ImageButton.Source>
+                                    <iconsS:IconSource Icon="Th" Color="White" />
+                                </ImageButton.Source>
+                            </ImageButton>
                             <Label
                                 Grid.Column="1"
                                 Style="{StaticResource LabelTitle}"
                                 Text="My task"
+                                TextColor="White"
+                                Margin="17,0,0,0"
                                 VerticalOptions="Center" />
                             <tk:AvatarView
                                 Grid.Column="2"
@@ -56,9 +63,9 @@
                                 FontSize="20"
                                 HorizontalOptions="End"
                                 Text="{Binding FirstLetter}"
-                                TextColor="White"
+                                TextColor="#2581DD"
                                 VerticalOptions="Center"
-                                Color="{Binding Color}" />
+                                Color="White" />
                         </Grid>
                         <Label
                             Grid.Row="1"
@@ -70,11 +77,13 @@
                                     <Span
                                         FontFamily="ProductSans-Regular"
                                         FontSize="Body"
+                                        TextColor="#CEE7FF"
                                         Text="{x:Static resources:AppResources.WelcomeBack}" />
                                     <Span Text=" " />
                                     <Span
                                         FontAttributes="Bold"
                                         FontFamily="ProductSans-Medium"
+                            TextColor="White"
                                         FontSize="Body"
                                         Text="{Binding Username}" />
                                 </FormattedString>
@@ -113,12 +122,15 @@
                                     <Image
                                         Margin="0,30,0,0"
                                         HeightRequest="80"
+                                        Scale="0.8"
                                         HorizontalOptions="Center"
-                                        Source="{local:ImageResource MyTask.Resources.Images.no_tasks.png}"
-                                        WidthRequest="80" />
+                                        WidthRequest="80" >
+                                        <Image.Source>
+                                            <iconsS:IconSource Icon="Tasks" Color="#66768E"/>
+                                        </Image.Source>
+                                    </Image>
                                     <Label
                                         Grid.Row="1"
-                                        Margin="0,10,0,0"
                                         FontFamily="ProductSans-Medium"
                                         FontSize="Subtitle"
                                         HorizontalOptions="Center"
@@ -317,13 +329,13 @@
             </Grid>
             <ImageButton
                 Margin="0,0,10,10"
-                Padding="10"
+                Padding="15"
                 tk:ShadowEffect.Color="#AFB8EA"
                 tk:ShadowEffect.OffsetY="5"
                 tk:ShadowEffect.Opacity="0.6"
                 tk:ShadowEffect.Radius="5"
                 tk:TouchEffect.NormalAnimationDuration="200"
-                tk:TouchEffect.NormalBackgroundColor="{StaticResource BaseColorLight}"
+                tk:TouchEffect.NormalBackgroundColor="#2581DD"
                 tk:TouchEffect.PressedAnimationDuration="60"
                 tk:TouchEffect.PressedBackgroundColor="#AFB8EA"
                 tk:TouchEffect.PressedScale="0.8"
@@ -331,9 +343,12 @@
                 CornerRadius="20"
                 HorizontalOptions="End"
                 IsVisible="{Binding CurrentDate, Converter={StaticResource NewTaskCurrentDateTodayVisibilityConverter}}"
-                Source="{local:ImageResource MyTask.Resources.Images.white_plus.png}"
                 VerticalOptions="End"
-                WidthRequest="55" />
+                >
+                <ImageButton.Source>
+                    <iconsS:IconSource Icon="Plus"  Color="White"/>
+                </ImageButton.Source>
+            </ImageButton>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

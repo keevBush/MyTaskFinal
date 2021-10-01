@@ -11,7 +11,7 @@ namespace MyTask.Converters
             var date =  values[0] == null ?DateTime.Now: (DateTime) values[0];
             var currentDate = (DateTime) values[1];
             if (date.ToShortDateString() == currentDate.ToShortDateString())
-                return Color.RoyalBlue;
+                return Color.FromHex("#1D67B0");
             else
                 return Color.FromHex("#FAFBFF");
         }

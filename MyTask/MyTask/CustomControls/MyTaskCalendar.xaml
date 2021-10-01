@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:MyTask.MarkupExtensions;assembly=MyTask"
     xmlns:templateSelector="clr-namespace:MyTask.DataTemplateSelectors;assembly=MyTask"
     xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:iconsS="clr-namespace:FontAwesome.Solid;assembly=FontAwesome.Solid"
     x:Name="page"
     RowDefinitions="auto,*">
     <Grid.Resources>
@@ -65,7 +66,7 @@
             FontFamily="ProductSans-Medium"
             FontSize="Title"
             Text="Scheduler"
-            TextColor="#1E2736"
+            TextColor="White"
             VerticalOptions="Center" />
         <Frame
             x:Name="monthYearView"
@@ -74,7 +75,7 @@
             tk:TouchEffect.NormalAnimationDuration="200"
             tk:TouchEffect.NormalBackgroundColor="Transparent"
             tk:TouchEffect.PressedAnimationDuration="60"
-            tk:TouchEffect.PressedBackgroundColor="#F0F2F7"
+            tk:TouchEffect.PressedBackgroundColor="#5698DB"
             tk:TouchEffect.PressedScale="0.8"
             BorderColor="#D0DDED"
             CornerRadius="26"
@@ -92,7 +93,7 @@
                         FontFamily="ProductSans-Medium"
                         FontSize="Body"
                         Text="{Binding Source={x:Reference page}, Path=CurrentDate.Month, Converter={StaticResource MonthInToString}}"
-                        TextColor="#1E2736" />
+                        TextColor="White" />
                     <Label
                         x:Name="labelYear"
                         Grid.Row="1"
@@ -100,13 +101,16 @@
                         FontSize="Body"
                         Opacity="0.8"
                         Text="{Binding Source={x:Reference page}, Path=CurrentDate.Year}"
-                        TextColor="#1E2736" />
+                        TextColor="White" />
                 </Grid>
                 <Image
                     Grid.Column="1"
-                    Margin="5,0,8,0"
-                    Source="{local:ImageResource MyTask.Resources.Images.sort_down.png}"
-                    WidthRequest="15" />
+                    Margin="15,0,8,0"
+                    WidthRequest="10" >
+                    <Image.Source>
+                        <iconsS:IconSource Icon="ChevronDown"  Color="White"/>
+                    </Image.Source>
+                </Image>
             </Grid>
         </Frame>
     </Grid>
